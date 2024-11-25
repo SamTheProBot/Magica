@@ -35,6 +35,24 @@ const keysDown = async () => {
       case `Enter`:
         eventEmmiter.emit(EventMaping.ENTER_KEY);
         break;
+      case `1`:
+        eventEmmiter.emit(EventMaping.SWITCH_WEAPON, `0`);
+        break;
+      case `2`:
+        eventEmmiter.emit(EventMaping.SWITCH_WEAPON, `1`);
+        break;
+      case `3`:
+        eventEmmiter.emit(EventMaping.SWITCH_WEAPON, `2`);
+        break;
+      case `4`:
+        eventEmmiter.emit(EventMaping.SWITCH_WEAPON, `3`);
+        break;
+      case `5`:
+        eventEmmiter.emit(EventMaping.SWITCH_WEAPON, `4`);
+        break;
+      case `6`:
+        eventEmmiter.emit(EventMaping.SWITCH_WEAPON, `5`);
+        break;
     }
   });
 };
