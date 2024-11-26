@@ -1,5 +1,7 @@
+
 import { Living } from "./base/living";
 import { ctx } from "../store/canvas";
+import { MagnificationFactor } from "../util/constants";
 
 export class Enemy extends Living {
   constructor(image, positionX, positionY) {
@@ -19,8 +21,8 @@ export class Enemy extends Living {
       this.height,
       this.positionX - Camera.cameraX,
       this.positionY - Camera.cameraY,
-      this.width * 3.5,
-      this.height * 3.5
+      this.width * MagnificationFactor,
+      this.height * MagnificationFactor
     );
     if (this.moving && this.gameframe % Math.floor(6) === 0) {
       if (this.frame < 3) this.frame++;
@@ -28,4 +30,6 @@ export class Enemy extends Living {
     }
     this.gameframe++;
   }
+
+
 }

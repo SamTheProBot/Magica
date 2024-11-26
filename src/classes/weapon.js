@@ -2,17 +2,18 @@ import { Base } from "./base/base";
 import { ctx } from "../store/canvas";
 
 export class Weapon extends Base {
-  constructor(image, width, height, positionX, positionY) {
+  constructor(MetaData, positionX, positionY) {
     super(positionX, positionY);
-    this.image = Object.assign(new Image(), { src: `${image}` });
+    this.image = Object.assign(new Image(), { src: `${MetaData.Image}` });
     this.swinging = false;
     this.swingOffsetX = 0;
     this.swingOffsetY = 0;
     this.swingDirection = 1;
     this.swingSpeed = 5;
-    this.width = width;
-    this.height = height;
-    this.maxSwingDistance = height * 3.5;
+    this.type = MetaData.type;
+    this.width = MetaData.width;
+    this.height = MetaData.height;
+    this.maxSwingDistance = MetaData.height * 2.5;
   }
 
   draw(direction) {
@@ -24,26 +25,27 @@ export class Weapon extends Base {
 
       switch (direction) {
         case 0:
-          ctx.translate(centerX + this.swingOffsetX - 5, centerY + this.swingOffsetY + 20);
+          ctx.translate(centerX + this.swingOffsetX - 5, centerY + this.swingOffsetY + 25);
           ctx.rotate((180 * Math.PI) / 180);
           this.swingOffsetY += this.swingSpeed * this.swingDirection;
           break;
         case 1:
-          ctx.translate(centerX + this.swingOffsetX - 10, centerY + this.swingOffsetY - 20);
+          ctx.translate(centerX + this.swingOffsetX - 10, centerY + this.swingOffsetY - 25);
           ctx.rotate((0 * Math.PI) / 180);
           this.swingOffsetY -= this.swingSpeed * this.swingDirection;
           break;
         case 2:
-          ctx.translate(centerX + this.swingOffsetX - 20, centerY + this.swingOffsetY + 10);
+          ctx.translate(centerX + this.swingOffsetX - 25, centerY + this.swingOffsetY + 20);
           ctx.rotate((270 * Math.PI) / 180);
           this.swingOffsetX -= this.swingSpeed * this.swingDirection;
           break;
         case 3:
-          ctx.translate(centerX + this.swingOffsetX + 20, centerY + this.swingOffsetY + 10);
+          ctx.translate(centerX + this.swingOffsetX + 25, centerY + this.swingOffsetY + 20);
           ctx.rotate((90 * Math.PI) / 180);
           this.swingOffsetX += this.swingSpeed * this.swingDirection;
           break;
       }
+
       ctx.drawImage(
         this.image,
         -this.width * 1.75,
@@ -53,7 +55,7 @@ export class Weapon extends Base {
       );
       ctx.restore()
 
-      this.swingSpeed = this.swingDirection === 1 ? 15 : 5;
+      this.swingSpeed = this.swingDirection === 1 ? 10 : 5;
       if (
         Math.abs(this.swingOffsetY) >= this.maxSwingDistance ||
         Math.abs(this.swingOffsetX) >= this.maxSwingDistance

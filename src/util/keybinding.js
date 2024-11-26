@@ -47,12 +47,6 @@ const keysDown = async () => {
       case `4`:
         eventEmmiter.emit(EventMaping.SWITCH_WEAPON, `3`);
         break;
-      case `5`:
-        eventEmmiter.emit(EventMaping.SWITCH_WEAPON, `4`);
-        break;
-      case `6`:
-        eventEmmiter.emit(EventMaping.SWITCH_WEAPON, `5`);
-        break;
     }
   });
 };
