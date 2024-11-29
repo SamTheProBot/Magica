@@ -1,6 +1,7 @@
 import { Base } from "./base/base";
 import { ctx } from "../store/canvas";
-import { MagnificationFactor } from "../util/constants";
+import { MagnificationFactor } from "../constants/magnification";
+import { Direction } from "../constants/direction";
 
 export class Projetile extends Base {
   constructor(MetaData, positionX, positionY) {

@@ -1,17 +1,18 @@
 import { Living } from "./base/living";
 import { ctx } from "../store/canvas";
-import { MagnificationFactor } from "../util/constants";
+import { MagnificationFactor } from "../constants/magnification";
+import { Direction } from "../constants/direction";
 
 export class Player extends Living {
   constructor(image, positionX, positionY) {
     super(positionX, positionY);
-    this.positionY = 400;
-    this.positionX = 400;
+    this.positionX = 730;
+    this.positionY = 120;
     this.width = 16;
     this.height = 16;
     this.equipedWeapon = null;
     this.inventry = [];
-    this.movementSpeed = 3;
+    this.movementSpeed = 5;
     this.moving = false;
     this.movementParameter = {
       up: false,
@@ -55,7 +56,7 @@ export class Player extends Living {
       this.width,
       this.height,
       drawX + this.width / 2,
-      drawY + this.height * 2.5,
+      drawY + this.height * 2.7,
       this.width * MagnificationFactor,
       this.height * MagnificationFactor
     );
@@ -104,24 +105,30 @@ export class Player extends Living {
     this.gameframe++;
   }
 
-  moveUp() {
-    if (!this.equipedWeapon.swinging) {
-      this.direction = 1;
-    }
+  updatePlayerLocaion(positionX, positionY) {
+    this.positionX = positionX;
+    this.positionY = positionY;
   }
+
+
   moveDown() {
     if (!this.equipedWeapon.swinging) {
-      this.direction = 0;
+      this.direction = Direction.down;
     }
   }
-  moveRight() {
+  moveUp() {
     if (!this.equipedWeapon.swinging) {
-      this.direction = 3;
+      this.direction = Direction.up;
     }
   }
   moveLeft() {
     if (!this.equipedWeapon.swinging) {
-      this.direction = 2;
+      this.direction = Direction.left;
+    }
+  }
+  moveRight() {
+    if (!this.equipedWeapon.swinging) {
+      this.direction = Direction.right;
     }
   }
 }

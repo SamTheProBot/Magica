@@ -1,8 +1,6 @@
 import { eventEmmiter, EventMaping } from './eventBinding';
 
 let onMove;
-let onSwap;
-let onAttack;
 
 const keysDown = async () => {
   window.addEventListener('keydown', (event) => {
@@ -83,18 +81,3 @@ export const keybindings = async () => {
   await keysUp();
 };
 
-export const preventDefaultBehavior = async () => {
-  window.addEventListener(`keydown`, (event) => {
-    switch (event.key) {
-      case 'ArrowUp':
-      case 'ArrowDown':
-      case 'ArrowLeft':
-      case 'ArrowRight':
-      case ' ':
-        event.preventDefault();
-        break;
-      default:
-        break;
-    }
-  });
-};

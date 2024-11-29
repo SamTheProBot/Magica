@@ -1,5 +1,6 @@
 import { Base } from "./base/base";
 import { ctx } from "../store/canvas";
+import { Direction } from "../constants/direction";
 
 export class Weapon extends Base {
   constructor(MetaData, positionX, positionY) {
@@ -24,22 +25,22 @@ export class Weapon extends Base {
       const centerY = this.canvasHeight / 2;
 
       switch (direction) {
-        case 0:
+        case Direction.down:
           ctx.translate(centerX + this.swingOffsetX - 5, centerY + this.swingOffsetY + 25);
           ctx.rotate((180 * Math.PI) / 180);
           this.swingOffsetY += this.swingSpeed * this.swingDirection;
           break;
-        case 1:
+        case Direction.up:
           ctx.translate(centerX + this.swingOffsetX - 10, centerY + this.swingOffsetY - 25);
           ctx.rotate((0 * Math.PI) / 180);
           this.swingOffsetY -= this.swingSpeed * this.swingDirection;
           break;
-        case 2:
+        case Direction.left:
           ctx.translate(centerX + this.swingOffsetX - 25, centerY + this.swingOffsetY + 20);
           ctx.rotate((270 * Math.PI) / 180);
           this.swingOffsetX -= this.swingSpeed * this.swingDirection;
           break;
-        case 3:
+        case Direction.right:
           ctx.translate(centerX + this.swingOffsetX + 25, centerY + this.swingOffsetY + 20);
           ctx.rotate((90 * Math.PI) / 180);
           this.swingOffsetX += this.swingSpeed * this.swingDirection;
