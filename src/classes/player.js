@@ -6,13 +6,13 @@ import { Direction } from "../constants/direction";
 export class Player extends Living {
   constructor(image, positionX, positionY) {
     super(positionX, positionY);
-    this.positionX = 730;
-    this.positionY = 120;
+    this.positionX = 1000;
+    this.positionY = 750;
     this.width = 16;
     this.height = 16;
     this.equipedWeapon = null;
     this.inventry = [];
-    this.movementSpeed = 5;
+    this.movementSpeed = 7;
     this.moving = false;
     this.movementParameter = {
       up: false,
@@ -22,6 +22,7 @@ export class Player extends Living {
     };
     this.shadowImage = Object.assign(new Image(), { src: `./Actor/Characters/Shadow.png` });
     this.image = Object.assign(new Image(), { src: `${image}` });
+    this.type = 'player'
   }
 
   addWeapon(weapon) {
@@ -48,7 +49,6 @@ export class Player extends Living {
     const drawY = (this.canvasHeight - this.height * 3.5) / 2;
 
     this.equipedWeapon.draw(this.direction, this.moving)
-
     ctx.drawImage(
       this.shadowImage,
       0,
@@ -105,9 +105,10 @@ export class Player extends Living {
     this.gameframe++;
   }
 
-  updatePlayerLocaion(positionX, positionY) {
+  updatePlayerLocaion(positionX, positionY, direction) {
     this.positionX = positionX;
     this.positionY = positionY;
+    this.direction = direction;
   }
 
 

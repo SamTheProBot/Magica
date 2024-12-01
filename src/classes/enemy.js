@@ -4,21 +4,17 @@ import { MagnificationFactor } from "../constants/magnification";
 import { Direction } from "../constants/direction";
 
 export class Enemy extends Living {
-  constructor(image, positionX, positionY) {
+  constructor(MetaData, positionX, positionY) {
     super(positionX, positionY);
+    this.type = 'enemy'
     this.width = 16;
     this.height = 16;
-    this.movementSpeed = 1.5;
-    this.movementBehaviour = {
-      idle: 0,
-      moving: 1,
-      stop: 2,
-    };
-    this.movementState = this.movementBehaviour.stop;
-    this.idleCounter = 0;
-    this.idleDuration = 300;
-    this.proximity = 250;
-    this.image = Object.assign(new Image(), { src: `${image}` });
+    this.moving = false;
+    this.movementSpeed = MetaData.Speed;
+    this.proximity = MetaData.Range;
+    this.attack = MetaData.Attack;
+    this.hp = MetaData.Hp;
+    this.image = MetaData.Image;
   }
 
   draw(Camera) {
@@ -34,7 +30,7 @@ export class Enemy extends Living {
       this.width * MagnificationFactor,
       this.height * MagnificationFactor
     );
-    if (this.movementState == this.movementBehaviour.moving && this.gameframe % Math.floor(6) === 0) {
+    if (this.moving && this.gameframe % Math.floor(6) === 0) {
       if (this.frame < 3) this.frame++;
       else this.frame = 0;
     }
@@ -51,7 +47,7 @@ export class Enemy extends Living {
       this.positionY + this.proximity > playerY &&
       this.positionY - this.proximity < playerY
     ) {
-      this.movementState = this.movementBehaviour.moving;
+      this.moving = true;
       this.idleCounter = 0;
       switch (this.getDirection(playerX, playerY)) {
         case Direction.down:
@@ -71,34 +67,8 @@ export class Enemy extends Living {
           this.positionX += this.movementSpeed;
           break;
       }
-    } else if (this.movementState == this.movementBehaviour.idle) {
-
-      switch (this.direction) {
-        case Direction.down:
-          this.direction = Direction.down;
-          this.positionY += this.movementSpeed;
-          break;
-        case Direction.up:
-          this.direction = Direction.up;
-          this.positionY -= this.movementSpeed;
-          break;
-        case Direction.left:
-          this.direction = Direction.left;
-          this.positionX -= this.movementSpeed;
-          break;
-        case Direction.right:
-          this.direction = Direction.right;
-          this.positionX += this.movementSpeed;
-          break;
-      }
-
     } else {
-      this.idleCounter++;
-      if (this.idleCounter > this.idleDuration) {
-        this.movementState = this.movementBehaviour.idle
-      } else {
-        this.movementState = this.movementBehaviour.stop;
-      }
+      this.moving = false
     }
   }
 

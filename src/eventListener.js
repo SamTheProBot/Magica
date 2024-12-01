@@ -1,5 +1,6 @@
 import { eventEmmiter, EventMaping } from './util/eventBinding';
-import { Hero } from './declare';
+import { Hero, Map } from './declare';
+
 
 export const EventListener = () => {
   eventEmmiter.on(EventMaping.UP_KEY, (_, onMove) => {
@@ -35,5 +36,12 @@ export const EventListener = () => {
   })
   eventEmmiter.on(EventMaping.SWITCH_WEAPON, (_, val) => {
     Hero.switchWeapon(parseInt(val))
+  })
+  eventEmmiter.on(EventMaping.SWITCH_MAP, (_, data) => {
+    let location = Map.returnData(data)
+    Map.switchMap(data)
+    Hero.updatePlayerLocaion(location.positionX, location.positionY, location.direction)
+  })
+  eventEmmiter.on(EventMaping.COLLISION, (_, data) => {
   })
 }

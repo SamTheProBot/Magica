@@ -1,6 +1,8 @@
 export class Node {
-  constructor(name, image, neighbour = []) {
-    this.name = name;
+  static PixilSize = 32;
+  constructor(name, dataArray, image, neighbour = []) {
+    this.Name = name;
+    this.dataArray = dataArray;
     this.image = image;
     this.neighbour = neighbour;
   }

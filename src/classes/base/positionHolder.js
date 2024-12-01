@@ -4,5 +4,6 @@ export class Position {
     this.positionX = positionX;
     this.positionY = positionY;
     this.direction = direction;
+    this.parent = '';
   }
 }

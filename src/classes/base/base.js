@@ -6,9 +6,12 @@ export class Base {
     this.positionY = positionY;
     this.canvasHeight = canvasHeight;
     this.canvasWidth = canvasWidth;
+    this.type = ''
     this.frame = 0;
     this.gameframe = 0;
   }
+
+
 
   collisionBoundries() {
     return {

@@ -1,16 +1,16 @@
 import { Base } from "./base/base";
 import { ctx } from "../store/canvas";
 import { MagnificationFactor } from "../constants/magnification";
-import { Direction } from "../constants/direction";
 
 export class Projetile extends Base {
   constructor(MetaData, positionX, positionY) {
     super(positionX, positionY)
-    this.width = MetaData.width,
-      this.height = MetaData.height,
-      this.noFrame = MetaData.frames,
-      this.duration = MetaData.duration,
-      this.image = Object.assign(new Image(), { src: `${MetaData.Image}` })
+    this.width = MetaData.width;
+    this.height = MetaData.height;
+    this.noFrame = MetaData.frames;
+    this.duration = MetaData.duration;
+    this.image = Object.assign(new Image(), { src: `${MetaData.Image}` });
+    this.type = 'projectile'
   }
 
   draw() {
