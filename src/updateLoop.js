@@ -1,6 +1,6 @@
 /** @type {HTMLCanvasElement} */
 import { Map } from "./declare";
-import { ReadGameObjectArray } from "./store/gameObject";
+import { ReadGameObjectArray, OverWrightGameObjectArray } from "./store/gameObject";
 import { collision } from "./util/collision";
 import { EventMaping } from "./util/eventBinding";
 import { eventEmmiter } from "./util/eventBinding";
@@ -15,11 +15,12 @@ export const UpdateGameLoop = (camera) => {
   Map.draw(camera)
 
   Player.forEach((plr) => {
-    plr.draw();
+    plr.draw(camera);
 
     Enemy.forEach((eny) => {
       eny.draw(camera)
-      if (collision(plr.collisionBoundries(), eny.collisionBoundries(), 16)) {
+      if (collision(plr.equipedWeapon.collisionBoundries(), eny.collisionBoundries(), 32)) {
+        eny.damageTaken(plr.equipedWeapon.damage);
         console.log('attack!!')
       }
     })
@@ -33,9 +34,8 @@ export const UpdateGameLoop = (camera) => {
     CollisionBoundries.forEach((boundry) => {
       boundry.draw(camera)
       if (collision(boundry.collisionBoundries(), plr.collisionBoundries())) {
-        console.log('collision!!')
       }
     })
   })
-
+  OverWrightGameObjectArray(ReadGameObjectArray().filter((obj) => obj.dead !== true))
 }

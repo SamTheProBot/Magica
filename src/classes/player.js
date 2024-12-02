@@ -6,8 +6,8 @@ import { Direction } from "../constants/direction";
 export class Player extends Living {
   constructor(image, positionX, positionY) {
     super(positionX, positionY);
-    this.positionX = 1000;
-    this.positionY = 750;
+    this.positionX = 1100;
+    this.positionY = 1200;
     this.width = 16;
     this.height = 16;
     this.equipedWeapon = null;
@@ -45,10 +45,10 @@ export class Player extends Living {
   }
 
   draw() {
-    const drawX = (this.canvasWidth - this.width * 3.5) / 2;
-    const drawY = (this.canvasHeight - this.height * 3.5) / 2;
+    const drawX = (this.canvasWidth - this.width * MagnificationFactor) / 2;
+    const drawY = (this.canvasHeight - this.height * MagnificationFactor) / 2;
 
-    this.equipedWeapon.draw(this.direction, this.moving)
+    this.equipedWeapon.draw(this.positionX, this.positionY, this.direction, this.moving)
     ctx.drawImage(
       this.shadowImage,
       0,

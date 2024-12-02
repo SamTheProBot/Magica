@@ -3,27 +3,36 @@ import { ctx } from "../store/canvas";
 import { Direction } from "../constants/direction";
 
 export class Weapon extends Base {
-  constructor(MetaData, positionX, positionY) {
-    super(positionX, positionY);
+  constructor(MetaData, Parent) {
+    super(0, 0);
     this.image = Object.assign(new Image(), { src: `${MetaData.Image}` });
     this.swinging = false;
     this.swingOffsetX = 0;
     this.swingOffsetY = 0;
-    this.swingDirection = 1;
+    this.swingDirection = -1;
     this.swingSpeed = 5;
+    this.parent = Parent;
+    this.damage = MetaData.damage;
     this.type = MetaData.type;
     this.width = MetaData.width;
     this.height = MetaData.height;
     this.maxSwingDistance = MetaData.height * 2.5;
   }
 
-  draw(direction) {
+  draw(positionX, positionY, direction) {
     if (this.swinging) {
+
+      let centerY = positionY + this.swingOffsetY;
+      let centerX = positionX + this.swingOffsetX;
+
+      this.positionX = centerX;
+      this.positionY = centerY;
+      if (this.parent === 'player') {
+        centerX = this.canvasWidth / 2;
+        centerY = this.canvasHeight / 2;
+      }
+
       ctx.save()
-
-      const centerX = this.canvasWidth / 2;
-      const centerY = this.canvasHeight / 2;
-
       switch (direction) {
         case Direction.down:
           ctx.translate(centerX + this.swingOffsetX - 5, centerY + this.swingOffsetY + 25);
@@ -64,6 +73,8 @@ export class Weapon extends Base {
         this.swingDirection = -1;
       }
       if (this.swingDirection === -1 && this.swingOffsetY === 0 && this.swingOffsetX === 0) {
+        this.swingOffsetY = 0;
+        this.swingOffsetX = 0;
         this.swingDirection = 1;
         this.swinging = false;
       }
@@ -72,8 +83,7 @@ export class Weapon extends Base {
 
   attack() {
     if (!this.swinging) {
-      this.swingOffsetY = 0;
-      this.swingOffsetX = 0;
+      this.swingDirection = 1;
       this.swinging = true;
     }
   }

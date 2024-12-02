@@ -25,8 +25,8 @@ export class Enemy extends Living {
       this.frame * 16,
       this.width,
       this.height,
-      this.positionX - Camera.X,
-      this.positionY - Camera.Y,
+      this.positionX - Camera.X - this.width,
+      this.positionY - Camera.Y - this.height,
       this.width * MagnificationFactor,
       this.height * MagnificationFactor
     );
@@ -38,8 +38,8 @@ export class Enemy extends Living {
   }
 
   movement(camera) {
-    let playerX = camera.X + this.canvasWidth / 2 - 32;
-    let playerY = camera.Y + this.canvasHeight / 2 - 32;
+    let playerX = camera.X + this.canvasWidth / 2;
+    let playerY = camera.Y + this.canvasHeight / 2;
 
     if (
       this.positionX + this.proximity > playerX &&
@@ -93,5 +93,12 @@ export class Enemy extends Living {
     if (distances.down === max) return Direction.up;
     if (distances.left === max) return Direction.left;
     if (distances.right === max) return Direction.right;
+  }
+
+  damageTaken(dmg) {
+    this.hp -= dmg;
+    if (this.hp <= 0) {
+      this.dead = true;
+    }
   }
 }

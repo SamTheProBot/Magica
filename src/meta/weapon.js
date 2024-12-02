@@ -3,12 +3,14 @@ export const WeaponMetaData = {
     type: `melee`,
     height: 25,
     width: 5.5,
+    damage: 20,
     Image: '../Items/Weapons/Axe/Sprite.png'
   },
   Bow: {
     type: `range`,
     height: 6,
     width: 14,
+    damage: 20,
     Image: '../Items/Weapons/Bow/Sprite.png',
     Projectile: {
       Image: '../FX/Projectile/Arrow.png',
@@ -22,24 +24,28 @@ export const WeaponMetaData = {
     type: `melee`,
     height: 15,
     width: 7.5,
+    damage: 20,
     Image: '../Items/Weapons/Hammer/Sprite.png'
   },
   Katana: {
     type: `melee`,
     height: 20,
     width: 5,
+    damage: 20,
     Image: '../Items/Weapons/Katana/Sprite.png'
   },
   Lance: {
     type: `melee`,
     height: 25,
     width: 5.5,
+    damage: 20,
     Image: '../Items/Weapons/Lance/Sprite.png'
   },
   Shuriken: {
     type: `range`,
     height: 24,
     width: 6,
+    damage: 20,
     Image: '',
     Projectile: {
       Image: '../FX/Projectile/Shuriken.png',
@@ -53,12 +59,14 @@ export const WeaponMetaData = {
     type: `melee`,
     height: 22,
     width: 5.5,
+    damage: 15,
     Image: '../Items/Weapons/Sword/Sprite.png'
   },
   Staff: {
     type: `range`,
     height: 24,
     width: 6,
+    damage: 20,
     Image: '../Items/Weapons/Staff/Sprite.png',
     Projectile: {
       Image: '../FX/Projectile/Fireball.png',
@@ -72,12 +80,14 @@ export const WeaponMetaData = {
     type: `melee`,
     height: 27,
     width: 6,
+    damage: 10,
     Image: '../Items/Weapons/Spear/Sprite.png'
   },
   Sai: {
     type: `melee`,
     height: 25,
     width: 5.5,
+    damage: 20,
     Image: '../Items/Weapons/Sai/Sprite.png'
   }
 }

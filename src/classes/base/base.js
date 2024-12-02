@@ -11,8 +11,6 @@ export class Base {
     this.gameframe = 0;
   }
 
-
-
   collisionBoundries() {
     return {
       top: this.positionY,
