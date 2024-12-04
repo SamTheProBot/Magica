@@ -7,7 +7,7 @@ export const MapMetaData = {
     Name: 'home',
     DataArray: HomeDataArray,
     Image: Object.assign(new Image(), { src: './Map/home.png' }),
-    neighbours: [new Position('village', 730, 460, Direction.down)],
+    neighbours: [new Position('village', 705, 440, Direction.down)],
 
   },
   Graveyard: {
@@ -20,7 +20,7 @@ export const MapMetaData = {
     Name: 'village',
     DataArray: VillageDataArray,
     Image: Object.assign(new Image(), { src: './Map/village.png' }),
-    neighbours: [new Position('home', 765, 1050, Direction.up), new Position('graveyard', 730, 120, Direction.down)],
+    neighbours: [new Position('home', 736, 1020, Direction.up), new Position('graveyard', 730, 120, Direction.down)],
   },
   Outpost: {
     Name: 'outpost',

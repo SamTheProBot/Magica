@@ -8,6 +8,7 @@ export class Collision {
     this.height = size;
     this.type = type;
     this.location = location;
+    this.buffer = 2;
   }
 
   draw(camera) {
@@ -20,11 +21,12 @@ export class Collision {
   }
 
   collisionBoundries() {
+    if (this.type === 'collision') this.buffer = 6;
     return {
-      top: this.positionY,
-      left: this.positionX - this.width / 2,
-      bottom: this.positionY + this.height,
-      right: this.positionX + this.width / 2,
+      top: this.positionY + this.buffer,
+      left: this.positionX - this.width + this.buffer,
+      bottom: this.positionY + this.height - this.buffer,
+      right: this.positionX - this.buffer,
     };
   }
 }

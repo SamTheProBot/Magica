@@ -4,7 +4,6 @@ import { Node } from "./base/node";
 import { Collision } from "./base/collision";
 import { Enemy } from './enemy'
 import { EnemyMetaData } from "../meta/enemy";
-import { MapMetaData } from "../meta/maps";
 
 export class Game {
   constructor(MetaData) {
@@ -22,7 +21,7 @@ export class Game {
       const { Name, DataArray, Image, neighbours } = metaData[i];
       this.nodes[Name] = new Node(Name, DataArray, Image, neighbours)
     }
-    this.currentNode = this.nodes['home'];
+    this.currentNode = this.nodes['village'];
     this.generateMap()
   }
 

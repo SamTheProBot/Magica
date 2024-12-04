@@ -19,7 +19,7 @@ export class Weapon extends Base {
     this.maxSwingDistance = MetaData.height * 2.5;
   }
 
-  draw(positionX, positionY, direction) {
+  draw(positionX, positionY, direction, width = 0, height = 0) {
     if (this.swinging) {
 
       let centerY = positionY + this.swingOffsetY;
@@ -63,8 +63,8 @@ export class Weapon extends Base {
         this.width * 3.5,
         this.height * 3.5
       );
-      ctx.restore()
 
+      ctx.restore()
       this.swingSpeed = this.swingDirection === 1 ? 10 : 5;
       if (
         Math.abs(this.swingOffsetY) >= this.maxSwingDistance ||

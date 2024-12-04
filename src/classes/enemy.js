@@ -18,18 +18,28 @@ export class Enemy extends Living {
   }
 
   draw(Camera) {
-    this.movement(Camera)
+    let playerX = Camera.X + this.canvasWidh / 2;
+    let playerY = Camera.Y + this.canvasHeight / 2;
+    this.movement(playerX, playerY)
+
     ctx.drawImage(
       this.image,
       this.direction * 16,
       this.frame * 16,
       this.width,
       this.height,
-      this.positionX - Camera.X - this.width,
-      this.positionY - Camera.Y - this.height,
+      this.positionX - Camera.X,
+      this.positionY - Camera.Y,
       this.width * MagnificationFactor,
       this.height * MagnificationFactor
     );
+
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(
+      this.positionX - Camera.X,
+      this.positionY - Camera.Y,
+      this.width, this.height);
+
     if (this.moving && this.gameframe % Math.floor(6) === 0) {
       if (this.frame < 3) this.frame++;
       else this.frame = 0;
@@ -37,10 +47,7 @@ export class Enemy extends Living {
     this.gameframe++;
   }
 
-  movement(camera) {
-    let playerX = camera.X + this.canvasWidth / 2;
-    let playerY = camera.Y + this.canvasHeight / 2;
-
+  movement(playerX, playerY) {
     if (
       this.positionX + this.proximity > playerX &&
       this.positionX - this.proximity < playerX &&

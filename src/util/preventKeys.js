@@ -12,14 +12,14 @@ export const preventDefaultBehavior = async () => {
         break;
     }
   });
-  window.addEventListener('keydown', (event) => {
-    if ((event.ctrlKey || event.metaKey) && (event.key === '+' || event.key === '-' || event.key === '=')) {
-      event.preventDefault();
-    }
-  })
-  window.addEventListener('wheel', (event) => {
-    if (event.ctrlKey || event.metaKey) {
-      event.preventDefault();
-    }
-  }, { passive: false })
+  // window.addEventListener('keydown', (event) => {
+  //   if ((event.ctrlKey || event.metaKey) && (event.key === '+' || event.key === '-' || event.key === '=')) {
+  //     event.preventDefault();
+  //   }
+  // })
+  // window.addEventListener('wheel', (event) => {
+  //   if (event.ctrlKey || event.metaKey) {
+  //     event.preventDefault();
+  //   }
+  // }, { passive: false })
 };

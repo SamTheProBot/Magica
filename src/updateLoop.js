@@ -1,7 +1,7 @@
 /** @type {HTMLCanvasElement} */
 import { Map } from "./declare";
 import { ReadGameObjectArray, OverWrightGameObjectArray } from "./store/gameObject";
-import { collision } from "./util/collision";
+import { collision, collisionDirection } from "./util/collision";
 import { EventMaping } from "./util/eventBinding";
 import { eventEmmiter } from "./util/eventBinding";
 
@@ -19,9 +19,11 @@ export const UpdateGameLoop = (camera) => {
 
     Enemy.forEach((eny) => {
       eny.draw(camera)
-      if (collision(plr.equipedWeapon.collisionBoundries(), eny.collisionBoundries(), 32)) {
-        eny.damageTaken(plr.equipedWeapon.damage);
-        console.log('attack!!')
+      if (collision(plr.equipedWeapon.collisionBoundries(), eny.collisionBoundries())) {
+        console.log('attack')
+      }
+      if (collision(plr.collisionBoundries(), eny.collisionBoundries())) {
+        console.log('collision')
       }
     })
     LocationBoundries.forEach((boundry) => {
@@ -34,6 +36,7 @@ export const UpdateGameLoop = (camera) => {
     CollisionBoundries.forEach((boundry) => {
       boundry.draw(camera)
       if (collision(boundry.collisionBoundries(), plr.collisionBoundries())) {
+        eventEmmiter.emit(EventMaping.COLLISION_PLAYER, collisionDirection(plr.collisionBoundries(), boundry.collisionBoundries()))
       }
     })
   })

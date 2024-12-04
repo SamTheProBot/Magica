@@ -1,4 +1,5 @@
 import { canvasHeight, canvasWidth } from '../../store/canvas';
+import { MagnificationFactor } from '../../constants/magnification';
 
 export class Base {
   constructor(positionX, positionY) {
@@ -14,9 +15,9 @@ export class Base {
   collisionBoundries() {
     return {
       top: this.positionY,
-      left: this.positionX - this.width / 2,
-      bottom: this.positionY + this.height,
-      right: this.positionX + this.width / 2,
+      left: this.positionX - (this.width * MagnificationFactor) / 2,
+      bottom: this.positionY + (this.height * MagnificationFactor),
+      right: this.positionX + (this.width / 2) * MagnificationFactor,
     };
   }
 }

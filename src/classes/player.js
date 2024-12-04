@@ -6,19 +6,19 @@ import { Direction } from "../constants/direction";
 export class Player extends Living {
   constructor(image, positionX, positionY) {
     super(positionX, positionY);
-    this.positionX = 1100;
-    this.positionY = 1200;
+    this.positionX = 705;
+    this.positionY = 440;
     this.width = 16;
     this.height = 16;
     this.equipedWeapon = null;
     this.inventry = [];
-    this.movementSpeed = 7;
+    this.movementSpeed = 5;
     this.moving = false;
-    this.movementParameter = {
-      up: false,
-      down: false,
-      left: false,
-      right: false,
+    this.movementRestriction = {
+      up: true,
+      down: true,
+      left: true,
+      right: true,
     };
     this.shadowImage = Object.assign(new Image(), { src: `./Actor/Characters/Shadow.png` });
     this.image = Object.assign(new Image(), { src: `${image}` });
@@ -45,10 +45,10 @@ export class Player extends Living {
   }
 
   draw() {
-    const drawX = (this.canvasWidth - this.width * MagnificationFactor) / 2;
-    const drawY = (this.canvasHeight - this.height * MagnificationFactor) / 2;
+    const drawX = this.canvasWidth / 2;
+    const drawY = this.canvasHeight / 2;
+    this.equipedWeapon.draw(this.positionX, this.positionY, this.direction, this.width, this.height);
 
-    this.equipedWeapon.draw(this.positionX, this.positionY, this.direction, this.moving)
     ctx.drawImage(
       this.shadowImage,
       0,
@@ -73,20 +73,43 @@ export class Player extends Living {
       this.height * MagnificationFactor
     )
 
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(drawX, drawY, this.width, this.height);
+
     if (this.moving) {
       switch (this.direction) {
-        case 0:
-          this.positionY += this.movementSpeed;
+        case Direction.down:
+          if (this.movementRestriction.down) {
+            this.positionY += this.movementSpeed;
+            this.movementRestriction.right = true;
+            this.movementRestriction.left = true;
+            this.movementRestriction.up = true;
+          }
           break;
-        case 1:
-          this.positionY -= this.movementSpeed;
+        case Direction.up:
+          if (this.movementRestriction.up) {
+            this.positionY -= this.movementSpeed;
+            this.movementRestriction.right = true;
+            this.movementRestriction.left = true;
+            this.movementRestriction.down = true;
+          }
           break;
-        case 2:
-          this.positionX -= this.movementSpeed;
+        case Direction.left:
+          if (this.movementRestriction.left) {
+            this.positionX -= this.movementSpeed;
+            this.movementRestriction.right = true;
+            this.movementRestriction.down = true;
+            this.movementRestriction.up = true;
+          }
           break;
-        case 3:
-          this.positionX += this.movementSpeed;
-          break;
+        case Direction.right:
+          if (this.movementRestriction.right) {
+            this.positionX += this.movementSpeed;
+            this.movementRestriction.down = true;
+            this.movementRestriction.left = true;
+            this.movementRestriction.up = true;
+          } break;
+        default:
       }
       if (this.equipedWeapon.swinging) {
         this.frame = 4;
@@ -111,7 +134,6 @@ export class Player extends Living {
     this.direction = direction;
   }
 
-
   moveDown() {
     if (!this.equipedWeapon.swinging) {
       this.direction = Direction.down;
@@ -130,6 +152,23 @@ export class Player extends Living {
   moveRight() {
     if (!this.equipedWeapon.swinging) {
       this.direction = Direction.right;
+    }
+  }
+
+  restrictMovement(direction) {
+    switch (direction) {
+      case Direction.up:
+        this.movementRestriction.up = false;
+        break;
+      case Direction.down:
+        this.movementRestriction.down = false;
+        break;
+      case Direction.left:
+        this.movementRestriction.left = false;
+        break;
+      case Direction.right:
+        this.movementRestriction.right = false;
+        break;
     }
   }
 }

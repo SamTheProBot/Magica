@@ -34,14 +34,18 @@ export const EventListener = () => {
   eventEmmiter.on(EventMaping.SPACE_KEY, () => {
     Hero.attack()
   })
-  eventEmmiter.on(EventMaping.SWITCH_WEAPON, (_, val) => {
-    Hero.switchWeapon(parseInt(val))
+  eventEmmiter.on(EventMaping.SWITCH_WEAPON, (_, index) => {
+    Hero.switchWeapon(parseInt(index))
   })
   eventEmmiter.on(EventMaping.SWITCH_MAP, (_, data) => {
-    let location = Map.returnData(data)
+    const location = Map.returnData(data)
     Map.switchMap(data)
     Hero.updatePlayerLocaion(location.positionX, location.positionY, location.direction)
   })
-  eventEmmiter.on(EventMaping.COLLISION, (_, data) => {
-  })
+  eventEmmiter.on(EventMaping.COLLISION, () => {
+
+  }),
+    eventEmmiter.on(EventMaping.COLLISION_PLAYER, (_, direction) => {
+      Hero.restrictMovement(direction);
+    })
 }
