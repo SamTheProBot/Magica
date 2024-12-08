@@ -38,7 +38,7 @@ export class Enemy extends Living {
     ctx.fillRect(
       this.positionX - Camera.X,
       this.positionY - Camera.Y,
-      this.width, this.height);
+      8, 8);
 
     if (this.moving && this.gameframe % Math.floor(6) === 0) {
       if (this.frame < 3) this.frame++;

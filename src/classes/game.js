@@ -21,7 +21,7 @@ export class Game {
       const { Name, DataArray, Image, neighbours } = metaData[i];
       this.nodes[Name] = new Node(Name, DataArray, Image, neighbours)
     }
-    this.currentNode = this.nodes['village'];
+    this.currentNode = this.nodes['home'];
     this.generateMap()
   }
 

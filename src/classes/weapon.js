@@ -19,7 +19,7 @@ export class Weapon extends Base {
     this.maxSwingDistance = MetaData.height * 2.5;
   }
 
-  draw(positionX, positionY, direction, width = 0, height = 0) {
+  draw(positionX, positionY, direction) {
     if (this.swinging) {
 
       let centerY = positionY + this.swingOffsetY;

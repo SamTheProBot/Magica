@@ -1,1 +1,1 @@
-export const MagnificationFactor = 4;
+export const MagnificationFactor = 3.8;

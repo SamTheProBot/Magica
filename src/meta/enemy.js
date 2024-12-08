@@ -11,7 +11,7 @@ export const EnemyMetaData = {
     Image: Object.assign(new Image(), { src: "../../public/Actor/Monsters/Skull/SpriteSheet.png" }),
     Speed: 1,
     Range: 450,
-    Hp: 100,
+    Hp: 100000,
     Attack: 20,
   },
   eye: {
