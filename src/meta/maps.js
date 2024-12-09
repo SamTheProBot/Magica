@@ -13,7 +13,8 @@ import {
   FrostSpireLakeDataArray,
   RavenFortDataArray,
   SilentVeilDataArray,
-  WoodPassDataArray
+  WoodPassDataArray,
+  SilentVeilTunnelDataArray
 } from "./mapdata"
 import { Position } from "../classes/base/positionHolder"
 import { Direction } from "../constants/direction"
@@ -34,8 +35,8 @@ export const MapMetaData = {
   abandonedHouse: {
     Name: 'abandonedHouse',
     DataArray: AbandonedHouseDataArray,
-    Image: Object.assign(new Image(), { src: './Map/home.png' }),
-    neighbours: [new Position('elderWood', 705, 425, Direction.down)],
+    Image: Object.assign(new Image(), { src: '../../public/Map/AbandonedHouse.png' }),
+    neighbours: [new Position('dustVale', 1640, 1390, Direction.down)],
   },
   elderWood: {
     Name: 'elderWood',
@@ -71,19 +72,25 @@ export const MapMetaData = {
     Name: 'emeraldRift',
     DataArray: EmeraldRiftDataArray,
     Image: Object.assign(new Image(), { src: './Map/EmeraldRift.png' }),
-    neighbours: [new Position('ravenFort', 2120, 100, Direction.down), new Position('silentVeilNecropolis', 630, 130, Direction.down),],
+    neighbours: [new Position('ravenFort', 2120, 100, Direction.down), new Position('silentVeilNecropolis', 630, 100, Direction.down),],
   },
   silentVeil: {
     Name: 'silentVeilNecropolis',
     DataArray: SilentVeilDataArray,
     Image: Object.assign(new Image(), { src: './Map/SilentVeilNecropolis.png' }),
-    neighbours: [new Position('emeraldRift', 2150, 1650, Direction.up), new Position('dustVale', 100, 100, Direction.right)],
+    neighbours: [new Position('emeraldRift', 2150, 1670, Direction.up), new Position('silentVeilTunnel', 1035, 170, Direction.down), new Position('dustVale', 150, 300, Direction.right)],
+  },
+  silentVeilTunnel: {
+    Name: 'silentVeilTunnel',
+    DataArray: SilentVeilTunnelDataArray,
+    Image: Object.assign(new Image(), { src: './Map/SilentVeilTunnel.png' }),
+    neighbours: [new Position('silentVeilNecropolis', 446, 1435, Direction.down)],
   },
   dustVale: {
     Name: 'dustVale',
     DataArray: DustValeDataArray,
     Image: Object.assign(new Image(), { src: './Map/Dustvale.png' }),
-    neighbours: [new Position('silentVeilNecropolis', 2400, 1450, Direction.left), new Position()],
+    neighbours: [new Position('silentVeilNecropolis', 2400, 1500, Direction.left), new Position('abandonedHouse', 208, 285, Direction.right)],
   },
   frostSpireLake: {
     Name: 'frostSpireLake',

@@ -1,4 +1,5 @@
 import { Base } from "./base/base";
+import { MagnificationFactor } from "../constants/magnification";
 import { ctx } from "../store/canvas";
 import { Direction } from "../constants/direction";
 
@@ -14,9 +15,10 @@ export class Weapon extends Base {
     this.parent = Parent;
     this.damage = MetaData.damage;
     this.type = MetaData.type;
+    this.size = 16 * MagnificationFactor;
     this.width = MetaData.width;
     this.height = MetaData.height;
-    this.maxSwingDistance = MetaData.height * 2.5;
+    this.maxSwingDistance = MetaData.height * 3.8;
   }
 
   draw(positionX, positionY, direction) {
@@ -24,6 +26,7 @@ export class Weapon extends Base {
 
       let centerY = positionY + this.swingOffsetY;
       let centerX = positionX + this.swingOffsetX;
+      let buffer = this.size / 2;
 
       this.positionX = centerX;
       this.positionY = centerY;
@@ -35,22 +38,22 @@ export class Weapon extends Base {
       ctx.save()
       switch (direction) {
         case Direction.down:
-          ctx.translate(centerX + this.swingOffsetX - 5, centerY + this.swingOffsetY + 25);
+          ctx.translate(centerX + this.swingOffsetX / 1.3 - 10 + buffer, centerY + this.swingOffsetY / 1.3 + buffer + 25);
           ctx.rotate((180 * Math.PI) / 180);
           this.swingOffsetY += this.swingSpeed * this.swingDirection;
           break;
         case Direction.up:
-          ctx.translate(centerX + this.swingOffsetX - 10, centerY + this.swingOffsetY - 25);
+          ctx.translate(centerX + this.swingOffsetX / 1.3 - 10 + buffer, centerY + this.swingOffsetY / 1.3 - 25 + buffer);
           ctx.rotate((0 * Math.PI) / 180);
           this.swingOffsetY -= this.swingSpeed * this.swingDirection;
           break;
         case Direction.left:
-          ctx.translate(centerX + this.swingOffsetX - 25, centerY + this.swingOffsetY + 20);
+          ctx.translate(centerX + this.swingOffsetX / 1.3 - 25 + buffer, centerY + this.swingOffsetY / 1.3 + 15 + buffer);
           ctx.rotate((270 * Math.PI) / 180);
           this.swingOffsetX -= this.swingSpeed * this.swingDirection;
           break;
         case Direction.right:
-          ctx.translate(centerX + this.swingOffsetX + 25, centerY + this.swingOffsetY + 20);
+          ctx.translate(centerX + this.swingOffsetX / 1.3 + 25 + buffer, centerY + this.swingOffsetY / 1.3 + 15 + buffer);
           ctx.rotate((90 * Math.PI) / 180);
           this.swingOffsetX += this.swingSpeed * this.swingDirection;
           break;
@@ -63,8 +66,14 @@ export class Weapon extends Base {
         this.width * 3.5,
         this.height * 3.5
       );
-
       ctx.restore()
+
+      ctx.fillStyle = 'blue';
+      //ctx.fillRect(
+      //  this.canvasWidth / 2 + this.swingOffsetX,
+      //  this.canvasHeight / 2 + this.swingOffsetY,
+      //  this.size, this.size);
+
       this.swingSpeed = this.swingDirection === 1 ? 10 : 5;
       if (
         Math.abs(this.swingOffsetY) >= this.maxSwingDistance ||
@@ -73,6 +82,8 @@ export class Weapon extends Base {
         this.swingDirection = -1;
       }
       if (this.swingDirection === -1 && this.swingOffsetY === 0 && this.swingOffsetX === 0) {
+        this.positionX = 0;
+        this.positionY = 0;
         this.swingOffsetY = 0;
         this.swingOffsetX = 0;
         this.swingDirection = 1;
@@ -86,6 +97,15 @@ export class Weapon extends Base {
       this.swingDirection = 1;
       this.swinging = true;
     }
+  }
+
+  collisionBoundries() {
+    return {
+      top: this.positionY + 10,
+      left: this.positionX - (this.size) / 2 + 10,
+      bottom: this.positionY + (this.size) - 10,
+      right: this.positionX + (this.size) / 2 - 10,
+    };
   }
 }
 

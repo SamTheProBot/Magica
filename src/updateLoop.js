@@ -16,14 +16,15 @@ export const UpdateGameLoop = (camera) => {
 
   Player.forEach((plr) => {
     plr.draw(camera);
-    console.log(plr.positionX, plr.positionY)
     Enemy.forEach((eny) => {
       eny.draw(camera)
       if (collision(plr.equipedWeapon.collisionBoundries(), eny.collisionBoundries())) {
-        console.log(plr.equipedWeapon.positionX, plr.equipedWeapon.positionY, eny.positionX, eny.positionY)
+        eny.damageTaken(plr.equipedWeapon.damage);
       }
+
       if (collision(plr.collisionBoundries(), eny.collisionBoundries())) {
         eventEmmiter.emit(EventMaping.COLLISION_PLAYER, collisionDirection(plr.collisionBoundries(), eny.collisionBoundries()))
+        console.log('Tooclose')
       }
     })
     LocationBoundries.forEach((boundry) => {

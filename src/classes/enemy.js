@@ -18,7 +18,7 @@ export class Enemy extends Living {
   }
 
   draw(Camera) {
-    let playerX = Camera.X + this.canvasWidh / 2;
+    let playerX = Camera.X + this.canvasWidth / 2;
     let playerY = Camera.Y + this.canvasHeight / 2;
     this.movement(playerX, playerY)
 
@@ -33,12 +33,6 @@ export class Enemy extends Living {
       this.width * MagnificationFactor,
       this.height * MagnificationFactor
     );
-
-    ctx.fillStyle = 'blue';
-    ctx.fillRect(
-      this.positionX - Camera.X,
-      this.positionY - Camera.Y,
-      8, 8);
 
     if (this.moving && this.gameframe % Math.floor(6) === 0) {
       if (this.frame < 3) this.frame++;

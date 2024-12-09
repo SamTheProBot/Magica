@@ -78,7 +78,7 @@ export const WeaponMetaData = {
   },
   Spear: {
     type: `melee`,
-    height: 27,
+    height: 30,
     width: 6,
     damage: 10,
     Image: '../Items/Weapons/Spear/Sprite.png'

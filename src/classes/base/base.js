@@ -17,7 +17,7 @@ export class Base {
       top: this.positionY,
       left: this.positionX - (this.width * MagnificationFactor) / 2,
       bottom: this.positionY + (this.height * MagnificationFactor),
-      right: this.positionX + (this.width / 2) * MagnificationFactor,
+      right: this.positionX + (this.width * MagnificationFactor) / 2,
     };
   }
 }

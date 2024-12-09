@@ -44,8 +44,8 @@ export const EventListener = () => {
   })
   eventEmmiter.on(EventMaping.COLLISION, () => {
 
-  }),
-    eventEmmiter.on(EventMaping.COLLISION_PLAYER, (_, direction) => {
-      Hero.restrictMovement(direction);
-    })
+  });
+  eventEmmiter.on(EventMaping.COLLISION_PLAYER, (_, direction) => {
+    Hero.restrictMovement(direction);
+  })
 }
