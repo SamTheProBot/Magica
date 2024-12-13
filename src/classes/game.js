@@ -4,7 +4,8 @@ import { Node } from "./base/node";
 import { Collision } from "./base/collision";
 import { Enemy } from './enemy'
 import { EnemyMetaData } from "../meta/enemy";
-
+import { WeatherMetaData } from "../meta/weather";
+import { Weather } from "./weather";
 export class Game {
   constructor(MetaData) {
     this.canvasWidth = canvasWidth;
@@ -13,15 +14,17 @@ export class Game {
     this.positionX = 0;
     this.positionY = 0;
     this.currentNode = null;
+    this.fadeState = false;
+    this.alpha = 1;
     this.loadMapMetaData(MetaData)
   }
 
   loadMapMetaData(metaData) {
     for (const i in metaData) {
-      const { Name, DataArray, Image, neighbours } = metaData[i];
-      this.nodes[Name] = new Node(Name, DataArray, Image, neighbours)
+      const { Name, DataArray, Image, neighbours, Weather } = metaData[i];
+      this.nodes[Name] = new Node(Name, DataArray, Weather, Image, neighbours)
     }
-    this.currentNode = this.nodes['elderWood'];
+    this.currentNode = this.nodes['home'];
     this.generateMap()
   }
 
@@ -29,18 +32,20 @@ export class Game {
     const drawX = this.positionX - Camera.X;
     const drawY = this.positionY - Camera.Y;
     ctx.drawImage(this.currentNode.image, drawX, drawY)
+    this.generateWeather()
   }
 
   generateMap() {
     const filterObject = ReadGameObjectArray().filter(
-      (obj) => { return obj.type !== 'collision' && obj.type !== 'location' && obj.type !== 'enemy' }
+      (obj) => { return obj.type !== 'collision' && obj.type !== 'location' && obj.type !== 'enemy' && obj.type !== 'weather' }
     );
     OverWrightGameObjectArray(filterObject)
+
 
     this.currentNode.dataArray.forEach((Xaxis, i) => {
       Xaxis.forEach((Yaxis, j) => {
         const x = j * Node.PixilSize;
-        const y = i * Node.PixilSize;
+        const y = i * Node.PixilSize
         if (Yaxis === 1) {
           PushGameObjectArray(new Collision(x, y, Node.PixilSize, 'collision'));
         }
@@ -54,25 +59,74 @@ export class Game {
     })
   }
 
-  returnData(name) {
-    return this.currentNode.neighbour.filter((loc) => loc.name === name)[0];
+  switchMap(player, name) {
+    this.fade();
+    const loc = this.currentNode.neighbour.filter((loc) => loc.name === name)[0];
+    player.movementSpeed = 0;
+    setTimeout(() => {
+      player.updatePlayerLocaion(loc.positionX, loc.positionY, loc.direction)
+      this.currentNode = this.nodes[name];
+      this.generateMap();
+      player.movementSpeed = 6;
+    }, 700)
   }
 
-  switchMap(name) {
-    this.currentNode = this.nodes[name];
-    this.generateMap()
+  generateWeather() {
+    if (this.currentNode.weather === 'none' || this.currentNode.weather === undefined) return;
+    const weather = this.currentNode.dataArray.map((Xaxis) => {
+      return Xaxis.map((Yaxis) => {
+        if (Math.floor(Math.random() * (100000 / WeatherMetaData[this.currentNode.weather].frequency)) === 0) {
+          return this.currentNode.weather;
+        }
+        return 0
+      })
+    })
+
+    weather.forEach((Xaxis, i) => {
+      Xaxis.forEach((Yaxis, j) => {
+        const x = j * Node.PixilSize;
+        const y = (i - 5) * Node.PixilSize;
+        if (WeatherMetaData[Yaxis]) {
+          PushGameObjectArray(new Weather(WeatherMetaData[Yaxis], x, y))
+        }
+      })
+    })
   }
+
+  fade() {
+    if (this.fadeState) return;
+
+    this.fadeState = true;
+    this.alpha = 1;
+
+    const fadeStepOut = -(1 / (250 / 16));
+    const fadeStepIn = 1 / (700 / 16);
+
+    const fadeOutInterval = setInterval(() => {
+      this.alpha += fadeStepOut;
+
+      if (this.alpha <= 0) {
+        this.alpha = 0;
+        clearInterval(fadeOutInterval);
+
+        setTimeout(() => {
+
+
+          const fadeInInterval = setInterval(() => {
+            this.alpha += fadeStepIn;
+
+            if (this.alpha >= 1) {
+              this.alpha = 1;
+              this.fadeState = false;
+              clearInterval(fadeInInterval);
+            }
+
+            ctx.globalAlpha = this.alpha;
+          }, 16);
+        }, 400);
+      }
+      ctx.globalAlpha = this.alpha;
+    }, 16);
+  }
+
 }
-
-
-// GAME NODE
-// add nodes
-// current node 
-// change node
-// hold node data
-//
-// BASIC OF THE MAP NODE
-// map image of the schenery
-// array containing data related to selected map
-// connection to adjencent maps
-// change map function based on the tiling hitting

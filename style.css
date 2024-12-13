@@ -5,6 +5,7 @@ body {
 }
 
 #canvas {
+  z-index: -1;
   background-color: rgb(21, 27, 26);
   position: absolute;
   left: 50%;
@@ -12,4 +13,13 @@ body {
   transform: translate(-50%, -50%);
   /*border: 5px rgb(44, 44, 44) solid;*/
   border-radius: 20px;
+}
+
+.bannerContainer {
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  transform: translate(-50%, -50%);
+  max-width: 70%;
+  background-color: wheat;
 }

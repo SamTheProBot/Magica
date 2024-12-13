@@ -6,13 +6,13 @@ import { Direction } from "../constants/direction";
 export class Player extends Living {
   constructor(image, positionX, positionY) {
     super(positionX, positionY);
-    this.positionX = 1900;
-    this.positionY = 1300;
+    this.positionX = 800;
+    this.positionY = 800;
     this.width = 16;
     this.height = 16;
     this.equipedWeapon = null;
     this.inventry = [];
-    this.movementSpeed = 8;
+    this.movementSpeed = 6;
     this.moving = false;
     this.movementRestriction = {
       up: true,

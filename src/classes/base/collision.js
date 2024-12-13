@@ -13,9 +13,9 @@ export class Collision {
 
   draw(camera) {
     if (this.type === 'collision') {
-      ctx.fillStyle = `rgba(255,0,0,0.1)`;
+      ctx.fillStyle = `rgba(255,0,0,0)`;
     } else {
-      ctx.fillStyle = `rgba(0,255,255,0.1)`;
+      ctx.fillStyle = `rgba(0,255,255,0)`;
     }
     ctx.fillRect(this.positionX - camera.X, this.positionY - camera.Y, 32, 32);
   }

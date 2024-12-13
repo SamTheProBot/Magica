@@ -1,5 +1,6 @@
 /** @type {HTMLCanvasElement} */
 import { Map } from "./declare";
+import { WeatherMetaData } from "./meta/weather";
 import { ReadGameObjectArray, OverWrightGameObjectArray } from "./store/gameObject";
 import { collision, collisionDirection } from "./util/collision";
 import { EventMaping } from "./util/eventBinding";
@@ -11,6 +12,7 @@ export const UpdateGameLoop = (camera) => {
   let CollisionBoundries = ReadGameObjectArray().filter((obj) => obj.type === 'collision');
   let LocationBoundries = ReadGameObjectArray().filter((obj) => obj.type === 'location')
   let Enemy = ReadGameObjectArray().filter((obj) => obj.type === 'enemy');
+  let Weather = ReadGameObjectArray().filter((obj) => obj.type === 'weather');
 
   Map.draw(camera)
 
@@ -41,6 +43,9 @@ export const UpdateGameLoop = (camera) => {
         eventEmmiter.emit(EventMaping.COLLISION_PLAYER, collisionDirection(plr.collisionBoundries(), boundry.collisionBoundries()))
       }
     })
+  })
+  Weather.forEach((drops) => {
+    drops.draw(camera)
   })
   OverWrightGameObjectArray(ReadGameObjectArray().filter((obj) => obj.dead !== true))
 }

@@ -7,7 +7,6 @@ import { preventDefaultBehavior } from './util/preventKeys';
 
 const animation = () => {
   Camera.update(Hero.positionY, Hero.positionX);
-  Camera.fade(1)
   ctx.clearRect(0, 0, canvasWidth, canvasHeight)
   UpdateGameLoop(Camera);
   requestAnimationFrame(animation)
