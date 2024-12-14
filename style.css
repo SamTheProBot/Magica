@@ -1,7 +1,15 @@
+@font-face {
+  font-family: 'magica';
+  src: url('./HUD/Font/NormalFont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   touch-action: none;
   overflow: hidden;
   background-color: rgb(21, 27, 26);
+  font-family: 'magica';
 }
 
 #canvas {
@@ -11,15 +19,36 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  /*border: 5px rgb(44, 44, 44) solid;*/
   border-radius: 20px;
 }
 
 .bannerContainer {
+  transition: top 0.5s ease-out;
+  color: #a06531;
+  font-size: 1.5rem;
   position: absolute;
+  letter-spacing: -0.5px;
   left: 50%;
-  top: 10%;
+  top: -10%;
   transform: translate(-50%, -50%);
-  max-width: 70%;
-  background-color: wheat;
+  max-width: 340px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 35/11;
+  background: url('/HUD/banner.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 55%;
+  width: 70%;
+  margin-top: -10px;
 }

@@ -12,6 +12,7 @@ export const UpdateGameLoop = (camera) => {
   let CollisionBoundries = ReadGameObjectArray().filter((obj) => obj.type === 'collision');
   let LocationBoundries = ReadGameObjectArray().filter((obj) => obj.type === 'location')
   let Enemy = ReadGameObjectArray().filter((obj) => obj.type === 'enemy');
+  let Item = ReadGameObjectArray().filter((obj) => obj.type === 'item')
   let Weather = ReadGameObjectArray().filter((obj) => obj.type === 'weather');
 
   Map.draw(camera)
@@ -43,6 +44,9 @@ export const UpdateGameLoop = (camera) => {
         eventEmmiter.emit(EventMaping.COLLISION_PLAYER, collisionDirection(plr.collisionBoundries(), boundry.collisionBoundries()))
       }
     })
+  })
+  Item.forEach((item) => {
+    item.draw(camera)
   })
   Weather.forEach((drops) => {
     drops.draw(camera)

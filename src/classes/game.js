@@ -1,11 +1,15 @@
 import { ctx, canvasWidth, canvasHeight } from "../store/canvas";
 import { PushGameObjectArray, OverWrightGameObjectArray, ReadGameObjectArray } from "../store/gameObject";
+import { ItemMetaData, ItemSpawnList } from "../meta/item";
 import { Node } from "./base/node";
+import { Items } from "./item";
 import { Collision } from "./base/collision";
 import { Enemy } from './enemy'
 import { EnemyMetaData } from "../meta/enemy";
 import { WeatherMetaData } from "../meta/weather";
 import { Weather } from "./weather";
+import { ShowBanner } from "../ui/locationBanner";
+
 export class Game {
   constructor(MetaData) {
     this.canvasWidth = canvasWidth;
@@ -26,6 +30,7 @@ export class Game {
     }
     this.currentNode = this.nodes['home'];
     this.generateMap()
+    this.generateItem()
   }
 
   draw(Camera) {
@@ -37,11 +42,9 @@ export class Game {
 
   generateMap() {
     const filterObject = ReadGameObjectArray().filter(
-      (obj) => { return obj.type !== 'collision' && obj.type !== 'location' && obj.type !== 'enemy' && obj.type !== 'weather' }
+      (obj) => { return obj.type !== 'item' && obj.type !== 'collision' && obj.type !== 'location' && obj.type !== 'enemy' && obj.type !== 'weather' }
     );
     OverWrightGameObjectArray(filterObject)
-
-
     this.currentNode.dataArray.forEach((Xaxis, i) => {
       Xaxis.forEach((Yaxis, j) => {
         const x = j * Node.PixilSize;
@@ -63,25 +66,26 @@ export class Game {
     this.fade();
     const loc = this.currentNode.neighbour.filter((loc) => loc.name === name)[0];
     player.movementSpeed = 0;
+    ShowBanner(name);
     setTimeout(() => {
       player.updatePlayerLocaion(loc.positionX, loc.positionY, loc.direction)
       this.currentNode = this.nodes[name];
       this.generateMap();
+      this.generateItem()
       player.movementSpeed = 6;
-    }, 700)
+    }, 800)
   }
 
   generateWeather() {
     if (this.currentNode.weather === 'none' || this.currentNode.weather === undefined) return;
     const weather = this.currentNode.dataArray.map((Xaxis) => {
-      return Xaxis.map((Yaxis) => {
+      return Xaxis.map(() => {
         if (Math.floor(Math.random() * (100000 / WeatherMetaData[this.currentNode.weather].frequency)) === 0) {
           return this.currentNode.weather;
         }
         return 0
       })
     })
-
     weather.forEach((Xaxis, i) => {
       Xaxis.forEach((Yaxis, j) => {
         const x = j * Node.PixilSize;
@@ -93,13 +97,19 @@ export class Game {
     })
   }
 
+  generateItem() {
+    ItemSpawnList[this.currentNode.name].forEach((item) => {
+      PushGameObjectArray(new Items(ItemMetaData[item.name], item.positionX, item.positionY))
+    });
+  }
+
   fade() {
     if (this.fadeState) return;
 
     this.fadeState = true;
     this.alpha = 1;
 
-    const fadeStepOut = -(1 / (250 / 16));
+    const fadeStepOut = -(1 / (300 / 16));
     const fadeStepIn = 1 / (700 / 16);
 
     const fadeOutInterval = setInterval(() => {
@@ -123,7 +133,7 @@ export class Game {
 
             ctx.globalAlpha = this.alpha;
           }, 16);
-        }, 400);
+        }, 600);
       }
       ctx.globalAlpha = this.alpha;
     }, 16);
