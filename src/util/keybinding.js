@@ -29,21 +29,9 @@ const keysDown = async () => {
         eventEmmiter.emit(EventMaping.SPACE_KEY);
         break;
       case `Shift`:
-        eventEmmiter.emit(EventMaping.SHIFT_KEY);
+        eventEmmiter.emit(EventMaping.SWITCH_WEAPON);
       case `Enter`:
         eventEmmiter.emit(EventMaping.ENTER_KEY);
-        break;
-      case `1`:
-        eventEmmiter.emit(EventMaping.SWITCH_WEAPON, `0`);
-        break;
-      case `2`:
-        eventEmmiter.emit(EventMaping.SWITCH_WEAPON, `1`);
-        break;
-      case `3`:
-        eventEmmiter.emit(EventMaping.SWITCH_WEAPON, `2`);
-        break;
-      case `4`:
-        eventEmmiter.emit(EventMaping.SWITCH_WEAPON, `3`);
         break;
     }
   });

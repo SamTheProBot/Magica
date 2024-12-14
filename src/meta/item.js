@@ -1,23 +1,3 @@
-import { Position } from "../classes/base/positionHolder"
-
-export const ItemSpawnList = {
-  abandonedHouse: [],
-  dustVale: [],
-  elderWood: [],
-  emeraldRift: [],
-  frostSpireLake: [],
-  hammerFlame: [],
-  home: [new Position('spear', 850, 800)],
-  house: [],
-  ichiranRaman: [],
-  ravenFortHall: [],
-  ravenFortHall2: [],
-  ravenFort: [],
-  SilentVeilNecropolis: [],
-  silentVeilTunnel: [],
-  woodPass: [],
-}
-
 export const ItemMetaData = {
   spear: {
     name: 'spear',
@@ -58,6 +38,7 @@ export const ItemMetaData = {
     width: 10,
     scalingFactor: 3,
     frame: 4,
+    score: 10,
     animationSpeed: 8
   },
   potion: {
@@ -72,7 +53,7 @@ export const ItemMetaData = {
   },
   sushi: {
     name: 'sushi',
-    kind: 'hp',
+    kind: 'food',
     Image: '../../public/Items/Food/Sushi2.png',
     height: 16,
     width: 16,
@@ -82,7 +63,7 @@ export const ItemMetaData = {
   },
   yakitori: {
     name: 'yakitori',
-    kind: 'hp',
+    kind: 'food',
     Image: '../../public/Items/Food/Yakitori.png',
     height: 16,
     width: 16,
@@ -92,7 +73,7 @@ export const ItemMetaData = {
   },
   seed: {
     name: 'seed',
-    kind: 'hp',
+    kind: 'food',
     Image: '../../public/Items/Food/SeedBig1.png',
     height: 16,
     width: 16,
@@ -102,7 +83,7 @@ export const ItemMetaData = {
   },
   fish: {
     name: 'fish',
-    kind: 'hp',
+    kind: 'food',
     Image: '../../public/Items/Food/Fish.png',
     height: 16,
     width: 16,
@@ -112,12 +93,13 @@ export const ItemMetaData = {
   },
   cup: {
     name: 'cup',
-    kind: 'special',
+    kind: 'score',
     Image: '../../public/Items/Treasure/GoldCup.png',
     height: 12,
     width: 12,
     scalingFactor: 4,
     frame: 1,
+    score: 100,
     animationSpeed: 8,
   },
 }

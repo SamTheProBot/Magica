@@ -2,7 +2,7 @@ import { Base } from "./base/base";
 import { ctx } from "../store/canvas";
 
 export class Items extends Base {
-  constructor(MetaData, positionX, positionY) {
+  constructor(MetaData, positionX, positionY, index) {
     super(positionX, positionY)
     this.type = 'item';
     this.dead = false;
@@ -15,6 +15,9 @@ export class Items extends Base {
     this.AnimationFrame = MetaData.frame - 1;
     this.AnimationDuration = MetaData.animationSpeed;
     this.scalingFactor = MetaData.scalingFactor
+    this.index = index;
+    this.gameframe = index * 10;
+    this.score = MetaData.score || 0;
     this.direction = false;
   }
 

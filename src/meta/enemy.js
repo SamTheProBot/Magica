@@ -3,7 +3,7 @@ export const EnemyMetaData = {
   snake: {
     Image: Object.assign(new Image(), { src: "./Actor/Monsters/Snake/Snake.png" }),
     Speed: 1.6,
-    Range: 20,
+    Range: 200,
     Hp: 100,
     Attack: 20,
   },

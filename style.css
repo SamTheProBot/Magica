@@ -22,6 +22,18 @@ body {
   border-radius: 20px;
 }
 
+.gameScore {
+  color: gold;
+  font-size: 2rem;
+  position: absolute;
+  letter-spacing: -0.5px;
+  left: 94%;
+  top: 7%;
+  transform: translate(-50%, -50%);
+  height: 75px;
+  width: 150px;
+}
+
 .bannerContainer {
   transition: top 0.5s ease-out;
   color: #a06531;

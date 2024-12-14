@@ -1,6 +1,7 @@
 import { ctx, canvasWidth, canvasHeight } from "../store/canvas";
 import { PushGameObjectArray, OverWrightGameObjectArray, ReadGameObjectArray } from "../store/gameObject";
-import { ItemMetaData, ItemSpawnList } from "../meta/item";
+import { ItemMetaData } from "../meta/item";
+import { ItemSpawnList } from "../adjecentLists/item";
 import { Node } from "./base/node";
 import { Items } from "./item";
 import { Collision } from "./base/collision";
@@ -9,6 +10,8 @@ import { EnemyMetaData } from "../meta/enemy";
 import { WeatherMetaData } from "../meta/weather";
 import { Weather } from "./weather";
 import { ShowBanner } from "../ui/locationBanner";
+import { UpdateScore } from "../ui/score";
+
 
 export class Game {
   constructor(MetaData) {
@@ -19,6 +22,7 @@ export class Game {
     this.positionY = 0;
     this.currentNode = null;
     this.fadeState = false;
+    this.Score = 0;
     this.alpha = 1;
     this.loadMapMetaData(MetaData)
   }
@@ -38,6 +42,7 @@ export class Game {
     const drawY = this.positionY - Camera.Y;
     ctx.drawImage(this.currentNode.image, drawX, drawY)
     this.generateWeather()
+    UpdateScore(this.Score)
   }
 
   generateMap() {
@@ -98,39 +103,40 @@ export class Game {
   }
 
   generateItem() {
-    ItemSpawnList[this.currentNode.name].forEach((item) => {
-      PushGameObjectArray(new Items(ItemMetaData[item.name], item.positionX, item.positionY))
-    });
+    if (ItemSpawnList[this.currentNode.name] !== undefined)
+      ItemSpawnList[this.currentNode.name].forEach((item, index) => {
+        if (item.direction)
+          PushGameObjectArray(new Items(ItemMetaData[item.name], item.positionX, item.positionY, index))
+      });
+  }
+
+  updateScore(score) {
+    this.Score += score;
+  }
+
+  updateAdjacentList(list, name, index) {
+    list[name][index].direction = 0;
   }
 
   fade() {
     if (this.fadeState) return;
-
     this.fadeState = true;
     this.alpha = 1;
-
     const fadeStepOut = -(1 / (300 / 16));
     const fadeStepIn = 1 / (700 / 16);
-
     const fadeOutInterval = setInterval(() => {
       this.alpha += fadeStepOut;
-
       if (this.alpha <= 0) {
         this.alpha = 0;
         clearInterval(fadeOutInterval);
-
         setTimeout(() => {
-
-
           const fadeInInterval = setInterval(() => {
             this.alpha += fadeStepIn;
-
             if (this.alpha >= 1) {
               this.alpha = 1;
               this.fadeState = false;
               clearInterval(fadeInInterval);
             }
-
             ctx.globalAlpha = this.alpha;
           }, 16);
         }, 600);

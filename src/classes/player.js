@@ -1,12 +1,13 @@
 import { Living } from "./base/living";
 import { ctx } from "../store/canvas";
+import { HeartMapping } from "../constants/healthMapping";
 import { MagnificationFactor } from "../constants/magnification";
 import { Direction } from "../constants/direction";
 
 export class Player extends Living {
   constructor(image, positionX, positionY) {
     super(positionX, positionY);
-    this.positionX = 800;
+    this.positionX = 900;
     this.positionY = 800;
     this.width = 16;
     this.height = 16;
@@ -14,12 +15,14 @@ export class Player extends Living {
     this.inventry = [];
     this.movementSpeed = 6;
     this.moving = false;
+    this.hp = 12;
     this.movementRestriction = {
       up: true,
       down: true,
       left: true,
       right: true,
     };
+    this.hpImage = Object.assign(new Image(), { src: `./HUD/Heart.png` })
     this.shadowImage = Object.assign(new Image(), { src: `./Actor/Characters/Shadow.png` });
     this.image = Object.assign(new Image(), { src: `${image}` });
     this.type = 'player'
@@ -32,8 +35,10 @@ export class Player extends Living {
     }
   }
 
-  switchWeapon(index) {
-    if (this.inventry.length >= index && index >= 0) {
+  switchWeapon() {
+    if (!this.equipedWeapon.swinging) {
+      let index = this.inventry.findIndex(weapon => weapon === this.equipedWeapon);
+      index = (index + 1) % this.inventry.length;
       this.equipedWeapon = this.inventry[index];
     }
   }
@@ -42,6 +47,16 @@ export class Player extends Living {
     if (this.equipedWeapon) {
       this.equipedWeapon.attack();
     }
+  }
+
+  eatFood() {
+    if (this.hp < 12) {
+      if (this.hp === 11) this.hp += 1;
+      else this.hp += 2;
+      return true;
+    }
+    else
+      return false
   }
 
   draw() {
@@ -72,7 +87,7 @@ export class Player extends Living {
       this.width * MagnificationFactor,
       this.height * MagnificationFactor
     )
-
+    this.drawHp()
     if (this.moving) {
       switch (this.direction) {
         case Direction.down:
@@ -123,6 +138,42 @@ export class Player extends Living {
       this.frame = 0;
     }
     this.gameframe++;
+  }
+
+  drawHp() {
+    ctx.drawImage(
+      this.hpImage,
+      HeartMapping.First[this.hp] * 16,
+      0,
+      this.width,
+      this.height,
+      10,
+      0,
+      this.width * MagnificationFactor,
+      this.height * MagnificationFactor
+    )
+    ctx.drawImage(
+      this.hpImage,
+      HeartMapping.Second[this.hp] * 16,
+      0,
+      this.width,
+      this.height,
+      12 + this.width * MagnificationFactor,
+      0,
+      this.width * MagnificationFactor,
+      this.height * MagnificationFactor
+    )
+    ctx.drawImage(
+      this.hpImage,
+      HeartMapping.Third[this.hp] * 16,
+      0,
+      this.width,
+      this.height,
+      14 + this.width * 2 * MagnificationFactor,
+      0,
+      this.width * MagnificationFactor,
+      this.height * MagnificationFactor
+    )
   }
 
   updatePlayerLocaion(positionX, positionY, direction) {

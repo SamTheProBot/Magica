@@ -1,6 +1,5 @@
 /** @type {HTMLCanvasElement} */
 import { Map } from "./declare";
-import { WeatherMetaData } from "./meta/weather";
 import { ReadGameObjectArray, OverWrightGameObjectArray } from "./store/gameObject";
 import { collision, collisionDirection } from "./util/collision";
 import { EventMaping } from "./util/eventBinding";
@@ -18,6 +17,7 @@ export const UpdateGameLoop = (camera) => {
   Map.draw(camera)
 
   Player.forEach((plr) => {
+    console.log(plr.positionX, plr.positionY)
     plr.draw(camera);
     Enemy.forEach((eny) => {
       eny.draw(camera)
@@ -33,7 +33,6 @@ export const UpdateGameLoop = (camera) => {
     LocationBoundries.forEach((boundry) => {
       boundry.draw(camera)
       if (collision(boundry.collisionBoundries(), plr.collisionBoundries())) {
-        console.log(boundry.location)
         eventEmmiter.emit(EventMaping.SWITCH_MAP, boundry.location)
       }
     })
@@ -41,13 +40,31 @@ export const UpdateGameLoop = (camera) => {
     CollisionBoundries.forEach((boundry) => {
       boundry.draw(camera)
       if (collision(boundry.collisionBoundries(), plr.collisionBoundries())) {
-        eventEmmiter.emit(EventMaping.COLLISION_PLAYER, collisionDirection(plr.collisionBoundries(), boundry.collisionBoundries()))
+        eventEmmiter.emit(EventMaping.COLLISION_BOUNDARY, collisionDirection(plr.collisionBoundries(), boundry.collisionBoundries()))
+      }
+    })
+
+    Item.forEach((item) => {
+      item.draw(camera)
+      if (collision(plr.collisionBoundries(), item.collisionBoundries())) {
+        switch (item.kind) {
+          case 'score':
+            eventEmmiter.emit(EventMaping.COLLISION_ITEM_SCORE, [item.score, item.index])
+            item.dead = true;
+            break;
+          case 'food':
+            eventEmmiter.emit(EventMaping.COLLISION_ITEM_FOOD, item.index)
+            item.dead = true;
+            break;
+          case 'weapon':
+            eventEmmiter.emit(EventMaping.COLLISION_ITEM_WEAPON, [item.name, item.index])
+            item.dead = true;
+        }
       }
     })
   })
-  Item.forEach((item) => {
-    item.draw(camera)
-  })
+
+
   Weather.forEach((drops) => {
     drops.draw(camera)
   })

@@ -21,7 +21,7 @@ export class Collision {
   }
 
   collisionBoundries() {
-    if (this.type === 'collision') this.buffer = 6;
+    if (this.type === 'collision') this.buffer = 16;
     return {
       top: this.positionY + this.buffer,
       left: this.positionX - this.width + this.buffer,

@@ -12,6 +12,7 @@ export class Weapon extends Base {
     this.swingOffsetY = 0;
     this.swingDirection = -1;
     this.swingSpeed = 5;
+    this.name = MetaData.name;
     this.parent = Parent;
     this.damage = MetaData.damage;
     this.type = MetaData.type;
