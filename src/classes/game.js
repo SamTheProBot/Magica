@@ -1,7 +1,7 @@
+import { AnimalsSpawnList, EnemySpawnList, ItemSpawnList, NPCSpawnList } from "../adjecentLists";
 import { ctx, canvasWidth, canvasHeight } from "../store/canvas";
 import { PushGameObjectArray, OverWrightGameObjectArray, ReadGameObjectArray } from "../store/gameObject";
 import { ItemMetaData } from "../meta/item";
-import { ItemSpawnList } from "../adjecentLists/item";
 import { Node } from "./base/node";
 import { Items } from "./item";
 import { Collision } from "./base/collision";
@@ -11,7 +11,6 @@ import { WeatherMetaData } from "../meta/weather";
 import { Weather } from "./weather";
 import { ShowBanner } from "../ui/locationBanner";
 import { UpdateScore } from "../ui/score";
-
 
 export class Game {
   constructor(MetaData) {
@@ -34,7 +33,7 @@ export class Game {
     }
     this.currentNode = this.nodes['home'];
     this.generateMap()
-    this.generateItem()
+    this.generateAdjecentList();
   }
 
   draw(Camera) {
@@ -76,7 +75,7 @@ export class Game {
       player.updatePlayerLocaion(loc.positionX, loc.positionY, loc.direction)
       this.currentNode = this.nodes[name];
       this.generateMap();
-      this.generateItem()
+      this.generateAdjecentList();
       player.movementSpeed = 6;
     }, 800)
   }
@@ -102,11 +101,24 @@ export class Game {
     })
   }
 
-  generateItem() {
+  generateAdjecentList() {
     if (ItemSpawnList[this.currentNode.name] !== undefined)
       ItemSpawnList[this.currentNode.name].forEach((item, index) => {
         if (item.direction)
           PushGameObjectArray(new Items(ItemMetaData[item.name], item.positionX, item.positionY, index))
+      });
+    if (EnemySpawnList[this.currentNode.name] !== undefined)
+      EnemySpawnList[this.currentNode.name].forEach((item, index) => {
+        if (item.direction)
+          PushGameObjectArray(new Enemy(EnemyMetaData[item.name], item.positionX, item.positionY, index))
+      })
+    if (AnimalsSpawnList[this.currentNode.name] !== undefined)
+      AnimalsSpawnList[this.currentNode.name].forEach((item, index) => {
+        if (item.direction);
+      });
+    if (NPCSpawnList[this.currentNode.name] !== undefined)
+      NPCSpawnList[this.currentNode.name].forEach((item, index) => {
+        if (item.direction);
       });
   }
 
@@ -115,6 +127,7 @@ export class Game {
   }
 
   updateAdjacentList(list, name, index) {
+    if (list[name][index].direction === 1) return;
     list[name][index].direction = 0;
   }
 

@@ -1,27 +1,31 @@
 
 export const EnemyMetaData = {
   snake: {
+    name: `snake`,
     Image: Object.assign(new Image(), { src: "./Actor/Monsters/Snake/Snake.png" }),
+    Speed: 1.6,
+    Range: 200,
+    Hp: 100,
+    Attack: 20
+  },
+  racoon: {
+    name: `racoon`,
+    Image: Object.assign(new Image(), { src: "./Actor/Monsters/GoldRacoon/SpriteSheet.png" }),
     Speed: 1.6,
     Range: 200,
     Hp: 100,
     Attack: 20,
   },
-  skull: {
-    Image: Object.assign(new Image(), { src: "./Actor/Monsters/Skull/SpriteSheet.png" }),
-    Speed: 1,
-    Range: 450,
-    Hp: 100000,
-    Attack: 20,
-  },
-  eye: {
-    Image: Object.assign(new Image(), { src: "./Actor/Monsters/Eye/Eye.png" }),
-    Speed: 2.5,
-    Range: 300,
-    Hp: 50,
+  mouse: {
+    name: `mouse`,
+    Image: Object.assign(new Image(), { src: "./Actor/Monsters/Mouse/SpriteSheet.png" }),
+    Speed: 1.6,
+    Range: 200,
+    Hp: 100,
     Attack: 20,
   },
   bamboo: {
+    name: `bamboo`,
     Image: Object.assign(new Image(), { src: "./Actor/Monsters/BambooYellow/SpriteSheet.png" }),
     Speed: 2,
     Range: 250,
@@ -29,10 +33,43 @@ export const EnemyMetaData = {
     Attack: 20,
   },
   mushroom: {
+    name: `mushroom`,
     Image: Object.assign(new Image(), { src: "./Actor/Monsters/Mushroom/mushroom.png" }),
     Speed: 2,
     Range: 250,
     Hp: 100,
     Attack: 20,
-  }
+  },
+  lizard: {
+    name: `lizard`,
+    Image: Object.assign(new Image(), { src: "./Actor/Monsters/Lizard/Lizard.png" }),
+    Speed: 2,
+    Range: 250,
+    Hp: 100,
+    Attack: 20,
+  },
+  skull: {
+    name: `skull`,
+    Image: Object.assign(new Image(), { src: "./Actor/Monsters/Skull/SpriteSheet.png" }),
+    Speed: 1,
+    Range: 450,
+    Hp: 100000,
+    Attack: 20,
+  },
+  flame: {
+    name: `flame`,
+    Image: Object.assign(new Image(), { src: "./Actor/Monsters/Flam2/SpriteSheet.png" }),
+    Speed: 2.5,
+    Range: 300,
+    Hp: 50,
+    Attack: 20,
+  },
+  beast: {
+    name: `beast`,
+    Image: Object.assign(new Image(), { src: "./Actor/Monsters/Beast2/Beast2.png" }),
+    Speed: 2.5,
+    Range: 300,
+    Hp: 50,
+    Attack: 20,
+  },
 }

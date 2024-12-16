@@ -1,15 +1,9 @@
-@font-face {
-  font-family: 'magica';
-  src: url('./HUD/Font/NormalFont.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 body {
   touch-action: none;
   overflow: hidden;
   background-color: rgb(21, 27, 26);
-  font-family: 'magica';
+  font-weight: 500;
+  font-family: "Pixelify Sans", system-ui;
 }
 
 #canvas {
@@ -24,11 +18,11 @@ body {
 
 .gameScore {
   color: gold;
-  font-size: 2rem;
+  font-size: 2.2rem;
   position: absolute;
   letter-spacing: -0.5px;
-  left: 94%;
-  top: 7%;
+  left: 95%;
+  top: 8%;
   transform: translate(-50%, -50%);
   height: 75px;
   width: 150px;
@@ -37,7 +31,7 @@ body {
 .bannerContainer {
   transition: top 0.5s ease-out;
   color: #a06531;
-  font-size: 1.5rem;
+  font-size: 2rem;
   position: absolute;
   letter-spacing: -0.5px;
   left: 50%;

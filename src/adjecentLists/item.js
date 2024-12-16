@@ -28,18 +28,19 @@ export const ItemSpawnList = {
     new Position('spear', 280, 250)
   ],
   home: [
-    new Position('sushi', 1200, 1010)],
+    new Position('sushi', 1200, 1010, 1)
+  ],
   house: [
     new Position('fish', 300, 420)
   ],
   ichiranRaman: [
-    new Position('sushi', 725, 270),
-    new Position('yakitori', 300, 325),
+    new Position('sushi', 725, 270, 1),
+    new Position('yakitori', 300, 325, 1),
     new Position('yakitori', 735, 200),
   ],
   ichigoRaman: [
     new Position('sushi', 725, 250),
-    new Position('yakitori', 300, 325),
+    new Position('yakitori', 300, 325, 1),
   ],
   ravenFortHall: [
     new Position('sushi', 625, 420),

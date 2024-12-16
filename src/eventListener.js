@@ -3,6 +3,7 @@ import { Hero, Map } from './declare';
 import { ItemSpawnList } from './adjecentLists/item';
 import { Weapon } from './classes/weapon';
 import { WeaponMetaData } from './meta/weapon';
+import { EnemySpawnList } from './adjecentLists';
 
 
 export const EventListener = () => {
@@ -57,5 +58,8 @@ export const EventListener = () => {
   eventEmmiter.on(EventMaping.COLLISION_ITEM_FOOD, (_, val) => {
     if (Hero.eatFood())
       Map.updateAdjacentList(ItemSpawnList, Map.currentNode.name, val)
+  })
+  eventEmmiter.on(EventMaping.ENEMY_DEAD, (_, val) => {
+    Map.updateAdjacentList(EnemySpawnList, Map.currentNode.name, val);
   })
 }

@@ -2,9 +2,10 @@ import { Living } from "./base/living";
 import { ctx } from "../store/canvas";
 import { MagnificationFactor } from "../constants/magnification";
 import { Direction } from "../constants/direction";
+import { eventEmmiter, EventMaping } from "../util/eventBinding";
 
 export class Enemy extends Living {
-  constructor(MetaData, positionX, positionY) {
+  constructor(MetaData, positionX, positionY, index) {
     super(positionX, positionY);
     this.type = 'enemy'
     this.width = 16;
@@ -15,6 +16,7 @@ export class Enemy extends Living {
     this.attack = MetaData.Attack;
     this.hp = MetaData.Hp;
     this.image = MetaData.Image;
+    this.index = index;
   }
 
   draw(Camera) {
@@ -99,6 +101,7 @@ export class Enemy extends Living {
   damageTaken(dmg) {
     this.hp -= dmg;
     if (this.hp <= 0) {
+      eventEmmiter.emit(EventMaping.ENEMY_DEAD, this.index);
       this.dead = true;
     }
   }

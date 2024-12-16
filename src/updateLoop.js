@@ -25,10 +25,6 @@ export const UpdateGameLoop = (camera) => {
         eny.damageTaken(plr.equipedWeapon.damage);
       }
 
-      if (collision(plr.collisionBoundries(), eny.collisionBoundries())) {
-        eventEmmiter.emit(EventMaping.COLLISION_PLAYER, collisionDirection(plr.collisionBoundries(), eny.collisionBoundries()))
-        console.log('Tooclose')
-      }
     })
     LocationBoundries.forEach((boundry) => {
       boundry.draw(camera)
