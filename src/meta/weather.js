@@ -1,7 +1,7 @@
 export const WeatherMetaData = {
   rain: {
     name: 'rain',
-    Image: './FX/Particle/Rain.png',
+    Image: Object.assign(new Image(), { src: './FX/Particle/Rain.png' }),
     height: 8,
     width: 8,
     scalingFactor: 4,
@@ -13,7 +13,7 @@ export const WeatherMetaData = {
   },
   heavyRain: {
     name: 'rain',
-    Image: './FX/Particle/Rain.png',
+    Image: Object.assign(new Image(), { src: './FX/Particle/Rain.png' }),
     height: 8,
     width: 8,
     scalingFactor: 4,
@@ -25,7 +25,7 @@ export const WeatherMetaData = {
   },
   rainOnFloor: {
     name: 'rainOnFloor',
-    Image: './FX/Particle/RainOnFloor.png',
+    Image: Object.assign(new Image(), { src: './FX/Particle/RainOnFloor.png' }),
     height: 8,
     width: 8,
     scalingFactor: 3.4,
@@ -37,7 +37,7 @@ export const WeatherMetaData = {
   },
   leaf: {
     name: 'leaf',
-    Image: './FX/Particle/Leaf.png',
+    Image: Object.assign(new Image(), { src: './FX/Particle/Leaf.png' }),
     height: 12,
     width: 12,
     scalingFactor: 3,
@@ -49,7 +49,7 @@ export const WeatherMetaData = {
   },
   leafpink: {
     name: 'leafpink',
-    Image: './FX/Particle/LeafPink.png',
+    Image: Object.assign(new Image(), { src: './FX/Particle/LeafPink.png' }),
     height: 12,
     width: 12,
     scalingFactor: 3,
@@ -61,7 +61,7 @@ export const WeatherMetaData = {
   },
   snow: {
     name: 'snow',
-    Image: './FX/Particle/Snow.png',
+    Image: Object.assign(new Image(), { src: './FX/Particle/Snow.png' }),
     height: 8,
     width: 8,
     scalingFactor: 3.8,

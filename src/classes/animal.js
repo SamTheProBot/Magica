@@ -8,7 +8,7 @@ export class Animals extends Living {
     this.type = 'animals';
     this.index = index;
     this.movementSpeed = MetaData.speed;
-    this.image = Object.assign(new Image(), { src: `${MetaData.Image}` });
+    this.image = MetaData.Image
     this.height = MetaData.height;
     this.width = MetaData.width;
     this.maxDistance = MetaData.range;

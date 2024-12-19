@@ -9,7 +9,7 @@ export class Projetile extends Base {
     this.height = MetaData.height;
     this.noFrame = MetaData.frames;
     this.duration = MetaData.duration;
-    this.image = Object.assign(new Image(), { src: `${MetaData.Image}` });
+    this.image = MetaData.Image;
     this.type = 'projectile'
   }
 

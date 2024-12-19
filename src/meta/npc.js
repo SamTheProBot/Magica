@@ -1,7 +1,7 @@
 export const NpcMetaData = {
   monk: {
     name: 'monk',
-    Image: '../../public/Actor/Characters/BlueNinja/SpriteSheet.png',
+    Image: Object.assign(new Image(), { src: './Actor/Characters/BlueNinja/SpriteSheet.png' }),
     speed: 1,
     size: true,
     range: 0,

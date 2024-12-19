@@ -7,7 +7,7 @@ export class Items extends Base {
     this.type = 'item';
     this.dead = false;
     this.pickedUp = false;
-    this.image = Object.assign(new Image(), { src: `${MetaData.Image}` });
+    this.image = MetaData.Image;
     this.height = MetaData.height;
     this.width = MetaData.width;
     this.name = MetaData.name;

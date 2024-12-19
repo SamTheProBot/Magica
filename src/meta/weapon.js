@@ -5,7 +5,7 @@ export const WeaponMetaData = {
     height: 25,
     width: 5.5,
     damage: 20,
-    Image: '../Items/Weapons/Axe/Sprite.png'
+    Image: Object.assign(new Image(), { src: './Items/Weapons/Axe/Sprite.png' }),
   },
   bow: {
     type: `range`,
@@ -13,9 +13,9 @@ export const WeaponMetaData = {
     height: 6,
     width: 14,
     damage: 20,
-    Image: '../Items/Weapons/Bow/Sprite.png',
+    Image: Object.assign(new Image(), { src: './Items/Weapons/Bow/Sprite.png' }),
     Projectile: {
-      Image: '../FX/Projectile/Arrow.png',
+      Image: Object.assign(new Image(), { src: './FX/Projectile/Arrow.png' }),
       height: 6,
       width: 14,
       frames: 1,
@@ -28,7 +28,7 @@ export const WeaponMetaData = {
     height: 15,
     width: 7.5,
     damage: 20,
-    Image: '../Items/Weapons/Hammer/Sprite.png'
+    Image: Object.assign(new Image(), { src: './Items/Weapons/Hammer/Sprite.png' }),
   },
   katana: {
     type: `melee`,
@@ -36,7 +36,7 @@ export const WeaponMetaData = {
     height: 20,
     width: 5,
     damage: 20,
-    Image: '../Items/Weapons/Katana/Sprite.png'
+    Image: Object.assign(new Image(), { src: './Items/Weapons/Katana/Sprite.png' }),
   },
   shuriken: {
     type: `range`,
@@ -46,7 +46,7 @@ export const WeaponMetaData = {
     damage: 20,
     Image: '',
     Projectile: {
-      Image: '../FX/Projectile/Shuriken.png',
+      Image: Object.assign(new Image(), { src: './FX/Projectile/Shuriken.png' }),
       height: 16,
       width: 16,
       frames: 2,
@@ -59,7 +59,7 @@ export const WeaponMetaData = {
     height: 22,
     width: 5.5,
     damage: 15,
-    Image: '../Items/Weapons/Sword/Sprite.png'
+    Image: Object.assign(new Image(), { src: './Items/Weapons/Sword/Sprite.png' }),
   },
   staff: {
     type: `range`,
@@ -67,9 +67,9 @@ export const WeaponMetaData = {
     height: 24,
     width: 6,
     damage: 20,
-    Image: '../Items/Weapons/Staff/Sprite.png',
+    Image: Object.assign(new Image(), { src: './Items/Weapons/Staff/Sprite.png' }),
     Projectile: {
-      Image: '../FX/Projectile/Fireball.png',
+      Image: Object.assign(new Image(), { src: './FX/Projectile/Fireball.png' }),
       height: 16,
       width: 16,
       frames: 4,
@@ -82,7 +82,7 @@ export const WeaponMetaData = {
     height: 30,
     width: 6,
     damage: 10,
-    Image: '../Items/Weapons/Spear/Sprite.png'
+    Image: Object.assign(new Image(), { src: './Items/Weapons/Spear/Sprite.png' }),
   },
   sai: {
     type: `melee`,
@@ -90,6 +90,6 @@ export const WeaponMetaData = {
     height: 25,
     width: 5.5,
     damage: 20,
-    Image: '../Items/Weapons/Sai/Sprite.png'
+    Image: Object.assign(new Image(), { src: './Items/Weapons/Sai/Sprite.png' }),
   }
 }

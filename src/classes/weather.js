@@ -4,22 +4,22 @@ import { PushGameObjectArray } from "../store/gameObject";
 import { WeatherMetaData } from "../meta/weather";
 
 export class Weather extends Base {
-  constructor(AnimationData, positionX, positionY) {
+  constructor(MetaData, positionX, positionY) {
     super(positionX, positionY);
     this.type = 'weather';
     this.dead = false;
     this.positionX = positionX;
     this.positionY = positionY;
-    this.img = Object.assign(new Image(), { src: `${AnimationData.Image}` });
-    this.AnimationDuration = AnimationData.animationSpeed;
-    this.width = AnimationData.width;
-    this.name = AnimationData.name;
-    this.height = AnimationData.height;
-    this.AnimationFrame = AnimationData.frame - 1;
-    this.frequency = AnimationData.frequency;
-    this.scalingFactor = AnimationData.scalingFactor;
-    this.velocity = AnimationData.velocity;
-    this.fallDistance = AnimationData.distance;
+    this.img = MetaData.Image;
+    this.AnimationDuration = MetaData.animationSpeed;
+    this.width = MetaData.width;
+    this.name = MetaData.name;
+    this.height = MetaData.height;
+    this.AnimationFrame = MetaData.frame - 1;
+    this.frequency = MetaData.frequency;
+    this.scalingFactor = MetaData.scalingFactor;
+    this.velocity = MetaData.velocity;
+    this.fallDistance = MetaData.distance;
   }
 
   draw(camera) {

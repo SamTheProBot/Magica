@@ -2,7 +2,7 @@ export const ItemMetaData = {
   spear: {
     name: 'spear',
     kind: 'weapon',
-    Image: './Items/Weapons/Spear/Sprite.png',
+    Image: Object.assign(new Image(), { src: './Items/Weapons/Spear/Sprite.png' }),
     height: 21,
     width: 7,
     scalingFactor: 4.2,
@@ -12,7 +12,7 @@ export const ItemMetaData = {
   bow: {
     name: 'bow',
     kind: 'weapon',
-    Image: './Items/Weapons/Bow/SpriteS.png',
+    Image: Object.assign(new Image(), { src: './Items/Weapons/Bow/SpriteS.png' }),
     image: '',
     height: 16,
     width: 8,
@@ -23,7 +23,7 @@ export const ItemMetaData = {
   staff: {
     name: 'staff',
     kind: 'weapon',
-    Image: '../../public/Items/Weapons/Staff/Sprite.png',
+    Image: Object.assign(new Image(), { src: '../../public/Items/Weapons/Staff/Sprite.png' }),
     height: 18,
     width: 6,
     scalingFactor: 4,
@@ -33,7 +33,7 @@ export const ItemMetaData = {
   coin: {
     name: 'coin',
     kind: 'score',
-    Image: './Items/Treasure/Coin2.png',
+    Image: Object.assign(new Image(), { src: './Items/Treasure/Coin2.png' }),
     height: 10,
     width: 10,
     scalingFactor: 3,
@@ -44,7 +44,7 @@ export const ItemMetaData = {
   potion: {
     name: 'potion',
     kind: 'hp',
-    Image: './Items/Potion/LifePot.png',
+    Image: Object.assign(new Image(), { src: './Items/Potion/LifePot.png' }),
     height: 12,
     width: 10,
     scalingFactor: 4,
@@ -54,7 +54,7 @@ export const ItemMetaData = {
   sushi: {
     name: 'sushi',
     kind: 'food',
-    Image: './Items/Food/Sushi2.png',
+    Image: Object.assign(new Image(), { src: './Items/Food/Sushi2.png' }),
     height: 16,
     width: 16,
     scalingFactor: 3.5,
@@ -64,7 +64,7 @@ export const ItemMetaData = {
   honey: {
     name: 'honey',
     kind: 'food',
-    Image: './Items/Food/Honey.png',
+    Image: Object.assign(new Image(), { src: './Items/Food/Honey.png' }),
     height: 16,
     width: 16,
     scalingFactor: 3.5,
@@ -74,7 +74,7 @@ export const ItemMetaData = {
   yakitori: {
     name: 'yakitori',
     kind: 'food',
-    Image: './Items/Food/Yakitori.png',
+    Image: Object.assign(new Image(), { src: './Items/Food/Yakitori.png' }),
     height: 16,
     width: 16,
     scalingFactor: 3.5,
@@ -84,7 +84,7 @@ export const ItemMetaData = {
   onigiri: {
     name: 'onigiri',
     kind: 'food',
-    Image: './Items/Food/Onigiri.png',
+    Image: Object.assign(new Image(), { src: './Items/Food/Onigiri.png' }),
     height: 16,
     width: 16,
     scalingFactor: 3.5,
@@ -94,7 +94,7 @@ export const ItemMetaData = {
   beaf: {
     name: 'beaf',
     kind: 'food',
-    Image: './Items/Food/Beaf.png',
+    Image: Object.assign(new Image(), { src: './Items/Food/Beaf.png' }),
     height: 16,
     width: 16,
     scalingFactor: 3.5,
@@ -104,7 +104,7 @@ export const ItemMetaData = {
   seed: {
     name: 'seed',
     kind: 'food',
-    Image: './Items/Food/SeedBig1.png',
+    Image: Object.assign(new Image(), { src: './Items/Food/SeedBig1.png' }),
     height: 16,
     width: 16,
     scalingFactor: 3.5,
@@ -114,7 +114,7 @@ export const ItemMetaData = {
   fish: {
     name: 'fish',
     kind: 'food',
-    Image: './Items/Food/Fish.png',
+    Image: Object.assign(new Image(), { src: './Items/Food/Fish.png' }),
     height: 16,
     width: 16,
     scalingFactor: 3.5,
@@ -124,7 +124,7 @@ export const ItemMetaData = {
   cup: {
     name: 'cup',
     kind: 'score',
-    Image: './Items/Treasure/GoldCup.png',
+    Image: Object.assign(new Image(), { src: './Items/Treasure/GoldCup.png' }),
     height: 12,
     width: 12,
     scalingFactor: 4,
@@ -135,7 +135,7 @@ export const ItemMetaData = {
   letter: {
     name: 'letter',
     kind: 'letter',
-    Image: './Items/Other/Letter.png',
+    Image: Object.assign(new Image(), { src: './Items/Other/Letter.png' }),
     height: 12,
     width: 12,
     scalingFactor: 4,

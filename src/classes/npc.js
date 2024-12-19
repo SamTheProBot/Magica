@@ -7,7 +7,7 @@ export class NPC extends Living {
     this.type = 'npc';
     this.index = index;
     this.movementSpeed = MetaData.speed;
-    this.image = Object.assign(new Image(), { src: `${MetaData.Image}` });
+    this.image = MetaData.Image;
     this.shadowImage = Object.assign(new Image(), { src: `./Actor/Characters/Shadow.png` });
     this.dialogImage = Object.assign(new Image(), { src: `./HUD/Dialog/DialogInfo.png` })
     this.height = MetaData.height;
