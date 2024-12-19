@@ -13,8 +13,21 @@ export const UpdateGameLoop = (camera) => {
   let Enemy = ReadGameObjectArray().filter((obj) => obj.type === 'enemy');
   let Item = ReadGameObjectArray().filter((obj) => obj.type === 'item')
   let Weather = ReadGameObjectArray().filter((obj) => obj.type === 'weather');
+  let Animals = ReadGameObjectArray().filter((obj) => obj.type === 'animals');
+  let NPC = ReadGameObjectArray().filter((obj) => obj.type === 'npc');
 
   Map.draw(camera)
+  Animals.forEach((animal) => {
+    animal.draw(camera)
+  })
+
+  Weather.forEach((drops) => {
+    drops.draw(camera)
+  })
+
+  NPC.forEach((npc) => {
+    npc.draw(camera);
+  })
 
   Player.forEach((plr) => {
     console.log(plr.positionX, plr.positionY)
@@ -60,9 +73,5 @@ export const UpdateGameLoop = (camera) => {
     })
   })
 
-
-  Weather.forEach((drops) => {
-    drops.draw(camera)
-  })
   OverWrightGameObjectArray(ReadGameObjectArray().filter((obj) => obj.dead !== true))
 }

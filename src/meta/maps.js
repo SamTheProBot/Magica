@@ -15,6 +15,10 @@ import {
   SilentVeilDataArray,
   WoodPassDataArray,
   SilentVeilTunnelDataArray,
+  IglooDataArray,
+  ChillwindRoadDataArray,
+  CliffPassDataArray,
+  FrostcliffRoadDataArray
 } from "./mapdata"
 import { Position } from "../classes/base/positionHolder"
 import { Direction } from "../constants/direction"
@@ -24,7 +28,7 @@ export const MapMetaData = {
     Name: 'home',
     DataArray: HomeDataArray,
     Image: Object.assign(new Image(), { src: './Map/home.png' }),
-    weather: 'none',
+    Weather: 'none',
     neighbours: [new Position('elderWood', 705, 420, Direction.down)],
   },
   house: {
@@ -60,7 +64,7 @@ export const MapMetaData = {
     DataArray: RavenFortDataArray,
     Image: Object.assign(new Image(), { src: './Map/Ravenfort.png' }),
     Weather: 'none',
-    neighbours: [new Position('woodPass', 2350, 1250, Direction.left), new Position('ichiranRaman', 650, 360, Direction.up), new Position('house', 483, 420, Direction.up), new Position('emeraldRift', 340, 1670, Direction.up), new Position('ravenFortHall', 370, 420, Direction.up), new Position('frostSpireLake', 210, 1600, Direction.right), new Position('hammerFlame', 400, 420, Direction.up)],
+    neighbours: [new Position('woodPass', 2350, 1250, Direction.left), new Position('ichiranRaman', 650, 360, Direction.up), new Position('house', 483, 420, Direction.up), new Position('emeraldRift', 340, 1670, Direction.up), new Position('ravenFortHall', 370, 420, Direction.up), new Position('chillwindRoad', 160, 1500, Direction.right), new Position('hammerFlame', 400, 420, Direction.up)],
   },
   ravenFortHall: {
     Name: 'ravenFortHall',
@@ -104,12 +108,40 @@ export const MapMetaData = {
     Weather: 'leafpink',
     neighbours: [new Position('silentVeilNecropolis', 2400, 1500, Direction.left), new Position('abandonedHouse', 208, 285, Direction.right)],
   },
+  igloo: {
+    Name: 'igloo',
+    DataArray: IglooDataArray,
+    Image: Object.assign(new Image(), { src: './Map/igloo.png' }),
+    Weather: 'none',
+    neighbours: [new Position('frostcliffRoad', 2300, 1235, Direction.down)],
+  },
+  chillwindRoad: {
+    Name: 'chillwindRoad',
+    DataArray: ChillwindRoadDataArray,
+    Image: Object.assign(new Image(), { src: './Map/chillwindRoad.png' }),
+    Weather: 'leaf',
+    neighbours: [new Position('ravenFort', 2350, 1650, Direction.left), new Position('cliffPass', 35, 115, Direction.right)],
+  },
+  cliffPass: {
+    Name: 'cliffPass',
+    DataArray: CliffPassDataArray,
+    Image: Object.assign(new Image(), { src: './Map/cliffPass.png' }),
+    Weather: 'none',
+    neighbours: [new Position('chillwindRoad', 1770, 530, Direction.left), new Position('frostcliffRoad', 700, 1150, Direction.right)],
+  },
+  frostcliffRoad: {
+    Name: 'frostcliffRoad',
+    DataArray: FrostcliffRoadDataArray,
+    Image: Object.assign(new Image(), { src: './Map/frostcliffRoad.png' }),
+    Weather: 'snow',
+    neighbours: [new Position('cliffPass', 520, 130, Direction.left), new Position('igloo', 290, 450, Direction.up), new Position('frostSpireLake', 200, 1600, Direction.right)],
+  },
   frostSpireLake: {
     Name: 'frostSpireLake',
     DataArray: FrostSpireLakeDataArray,
     Image: Object.assign(new Image(), { src: './Map/FrostspireLake.png' }),
     Weather: 'snow',
-    neighbours: [new Position('ravenFort', 2300, 1650, Direction.left)],
+    neighbours: [new Position('frostcliffRoad', 2300, 330, Direction.left)],
   },
   hammerFlame: {
     Name: 'hammerFlame',

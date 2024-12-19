@@ -7,8 +7,8 @@ import { Direction } from "../constants/direction";
 export class Player extends Living {
   constructor(image, positionX, positionY) {
     super(positionX, positionY);
-    this.positionX = 900;
-    this.positionY = 800;
+    this.positionX = 1030;
+    this.positionY = 750;
     this.width = 16;
     this.height = 16;
     this.equipedWeapon = null;
@@ -126,7 +126,7 @@ export class Player extends Living {
       if (this.equipedWeapon.swinging) {
         this.frame = 4;
       }
-      else if (this.gameframe % Math.floor(8) === 0) {
+      else if (this.gameframe % 8 === 0) {
         if (this.frame < 3) this.frame++;
         else this.frame = 0;
       }

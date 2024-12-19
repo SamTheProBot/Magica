@@ -36,7 +36,7 @@ export class Enemy extends Living {
       this.height * MagnificationFactor
     );
 
-    if (this.moving && this.gameframe % Math.floor(6) === 0) {
+    if (this.moving && this.gameframe % 5 === 0) {
       if (this.frame < 3) this.frame++;
       else this.frame = 0;
     }

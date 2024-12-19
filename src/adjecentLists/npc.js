@@ -6,6 +6,7 @@ export const NPCSpawnList = {
   dustVale: [
   ],
   elderWood: [
+    new Position('monk', 1500, 450)
   ],
   emeraldRift: [
   ],
@@ -32,6 +33,18 @@ export const NPCSpawnList = {
   silentVeilTunnel: [
   ],
   woodPass: [
+  ],
+  igloo: [
+
+  ],
+  chillwindRoad: [
+
+  ],
+  cliffPass: [
+
+  ],
+  frostcliffRoad: [
+
   ],
 }
 

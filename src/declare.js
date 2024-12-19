@@ -8,7 +8,7 @@ import { PushGameObjectArray } from './store/gameObject';
 
 export const Camera = new View();
 export const Map = new Game(MapMetaData)
-export const Hero = new Player('./Actor/Characters/GreenNinja/SpriteSheet.png');
+export const Hero = new Player('./Actor/Characters/BlueNinja/SpriteSheet.png');
 const Sai = new Weapon(WeaponMetaData.sword, 'player')
 
 Hero.addWeapon(Sai)

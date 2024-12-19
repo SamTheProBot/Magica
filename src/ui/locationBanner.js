@@ -17,6 +17,6 @@ export const ShowBanner = (name) => {
   banner.innerHTML = `${updated.join('')}`;
   setTimeout(() => {
     bannerContainer.style.top = '-10%';
-  }, 1750);
+  }, 1600);
 }
 

@@ -6,11 +6,15 @@ import { Node } from "./base/node";
 import { Items } from "./item";
 import { Collision } from "./base/collision";
 import { Enemy } from './enemy'
+import { Animals } from "./animal";
 import { EnemyMetaData } from "../meta/enemy";
+import { AnimalMetaData } from "../meta/animal"
 import { WeatherMetaData } from "../meta/weather";
+import { NpcMetaData } from "../meta/npc";
 import { Weather } from "./weather";
 import { ShowBanner } from "../ui/locationBanner";
 import { UpdateScore } from "../ui/score";
+import { NPC } from "./npc";
 
 export class Game {
   constructor(MetaData) {
@@ -46,7 +50,7 @@ export class Game {
 
   generateMap() {
     const filterObject = ReadGameObjectArray().filter(
-      (obj) => { return obj.type !== 'item' && obj.type !== 'collision' && obj.type !== 'location' && obj.type !== 'enemy' && obj.type !== 'weather' }
+      (obj) => { return obj.type === 'player' }
     );
     OverWrightGameObjectArray(filterObject)
     this.currentNode.dataArray.forEach((Xaxis, i) => {
@@ -55,9 +59,6 @@ export class Game {
         const y = i * Node.PixilSize
         if (Yaxis === 1) {
           PushGameObjectArray(new Collision(x, y, Node.PixilSize, 'collision'));
-        }
-        else if (EnemyMetaData[Yaxis]) {
-          PushGameObjectArray(new Enemy(EnemyMetaData[Yaxis], x, y));
         }
         else if (typeof Yaxis === 'string') {
           PushGameObjectArray(new Collision(x, y, Node.PixilSize, 'location', Yaxis));
@@ -77,7 +78,7 @@ export class Game {
       this.generateMap();
       this.generateAdjecentList();
       player.movementSpeed = 6;
-    }, 800)
+    }, 600)
   }
 
   generateWeather() {
@@ -114,11 +115,13 @@ export class Game {
       })
     if (AnimalsSpawnList[this.currentNode.name] !== undefined)
       AnimalsSpawnList[this.currentNode.name].forEach((item, index) => {
-        if (item.direction);
+        if (item.direction)
+          PushGameObjectArray(new Animals(AnimalMetaData[item.name], item.positionX, item.positionY, index))
       });
     if (NPCSpawnList[this.currentNode.name] !== undefined)
       NPCSpawnList[this.currentNode.name].forEach((item, index) => {
-        if (item.direction);
+        if (item.direction)
+          PushGameObjectArray(new NPC(NpcMetaData[item.name], item.positionX, item.positionY, index))
       });
   }
 
@@ -135,7 +138,7 @@ export class Game {
     if (this.fadeState) return;
     this.fadeState = true;
     this.alpha = 1;
-    const fadeStepOut = -(1 / (300 / 16));
+    const fadeStepOut = -(1 / (350 / 16));
     const fadeStepIn = 1 / (700 / 16);
     const fadeOutInterval = setInterval(() => {
       this.alpha += fadeStepOut;

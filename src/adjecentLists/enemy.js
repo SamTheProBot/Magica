@@ -43,5 +43,17 @@ export const EnemySpawnList = {
     new Position('mushroom', 1900, 400),
     new Position('bamboo', 2100, 1000, 1),
   ],
+  igloo: [
+
+  ],
+  chillwindRoad: [
+
+  ],
+  cliffPass: [
+
+  ],
+  frostcliffRoad: [
+
+  ],
 }
 

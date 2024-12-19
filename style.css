@@ -29,7 +29,7 @@ body {
 }
 
 .bannerContainer {
-  transition: top 0.5s ease-out;
+  transition: top 0.4s ease-out;
   color: #a06531;
   font-size: 2rem;
   position: absolute;
