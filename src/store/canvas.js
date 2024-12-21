@@ -14,7 +14,7 @@ const updateCanvasSize = () => {
   canvas.style.width = `92%`;
 };
 
-window.addEventListener('resize', updateCanvasSize);
+window.addEventListener('resize', updateCanvasSize())
 updateCanvasSize();
 
 export const canvasHeight = (canvas.height = windowHeight);

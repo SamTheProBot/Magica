@@ -7,13 +7,13 @@ import { Direction } from "../constants/direction";
 export class Player extends Living {
   constructor(image, positionX, positionY) {
     super(positionX, positionY);
-    this.positionX = 1030;
-    this.positionY = 750;
+    this.positionX = 900;
+    this.positionY = 700;
     this.width = 16;
     this.height = 16;
     this.equipedWeapon = null;
     this.inventry = [];
-    this.movementSpeed = 6;
+    this.movementSpeed = 8;
     this.moving = false;
     this.hp = 12;
     this.movementRestriction = {
@@ -183,24 +183,16 @@ export class Player extends Living {
   }
 
   moveDown() {
-    if (!this.equipedWeapon.swinging) {
-      this.direction = Direction.down;
-    }
+    this.direction = Direction.down;
   }
   moveUp() {
-    if (!this.equipedWeapon.swinging) {
-      this.direction = Direction.up;
-    }
+    this.direction = Direction.up;
   }
   moveLeft() {
-    if (!this.equipedWeapon.swinging) {
-      this.direction = Direction.left;
-    }
+    this.direction = Direction.left;
   }
   moveRight() {
-    if (!this.equipedWeapon.swinging) {
-      this.direction = Direction.right;
-    }
+    this.direction = Direction.right;
   }
 
   restrictMovement(direction) {

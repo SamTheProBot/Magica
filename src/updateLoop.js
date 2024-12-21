@@ -15,6 +15,8 @@ export const UpdateGameLoop = (camera) => {
   let Weather = ReadGameObjectArray().filter((obj) => obj.type === 'weather');
   let Animals = ReadGameObjectArray().filter((obj) => obj.type === 'animals');
   let NPC = ReadGameObjectArray().filter((obj) => obj.type === 'npc');
+  let Projectile = ReadGameObjectArray().filter((obj) => obj.type === 'projectile');
+  let Animation = ReadGameObjectArray().filter((obj) => obj.type === 'animation')
 
   Map.draw(camera)
   Animals.forEach((animal) => {
@@ -29,15 +31,39 @@ export const UpdateGameLoop = (camera) => {
     npc.draw(camera);
   })
 
+
+  Projectile.forEach((proj) => {
+    proj.draw(camera);
+    Enemy.forEach((eny) => {
+      if (collision(proj.collisionBoundries(), eny.collisionBoundries())) {
+        eventEmmiter.emit(EventMaping.ANIMATION, [proj.ani, eny.positionX, eny.positionY])
+        eny.damageTaken(proj.damage);
+        proj.dead = true;
+      }
+    })
+    LocationBoundries.forEach((boundry) => {
+      boundry.draw(camera)
+      if (collision(boundry.collisionBoundries(), proj.collisionBoundries())) {
+        proj.dead = true;
+      }
+    })
+
+    CollisionBoundries.forEach((boundry) => {
+      boundry.draw(camera)
+      if (collision(boundry.collisionBoundries(), proj.collisionBoundries())) {
+        proj.dead = true;
+      }
+    })
+  })
   Player.forEach((plr) => {
-    console.log(plr.positionX, plr.positionY)
+    //    console.log(plr.positionX, plr.positionY)
     plr.draw(camera);
     Enemy.forEach((eny) => {
       eny.draw(camera)
-      if (collision(plr.equipedWeapon.collisionBoundries(), eny.collisionBoundries())) {
+      if (collision(plr.equipedWeapon.collisionBoundries(), eny.collisionBoundries()) && plr.equipedWeapon.type === 'melee') {
         eny.damageTaken(plr.equipedWeapon.damage);
+        eventEmmiter.emit(EventMaping.ANIMATION, [plr.equipedWeapon.ani, eny.positionX, eny.positionY]);
       }
-
     })
     LocationBoundries.forEach((boundry) => {
       boundry.draw(camera)
@@ -71,6 +97,10 @@ export const UpdateGameLoop = (camera) => {
         }
       }
     })
+  })
+
+  Animation.forEach((ani) => {
+    ani.draw(camera)
   })
 
   OverWrightGameObjectArray(ReadGameObjectArray().filter((obj) => obj.dead !== true))

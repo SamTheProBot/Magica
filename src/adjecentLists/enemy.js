@@ -1,6 +1,9 @@
 import { Position } from "../classes/base/positionHolder"
 
 export const EnemySpawnList = {
+  home: [
+    new Position('racoon', 1300, 730)
+  ],
   abandonedHouse: [
   ],
   dustVale: [
@@ -21,9 +24,7 @@ export const EnemySpawnList = {
     new Position('lizard', 300, 1400, 1),
     new Position('mouse', 850, 1240),
     new Position('mouse', 2200, 760),
-    new Position('mouse', 2200, 1200),
     new Position('racoon', 1800, 1730)
-
   ],
   silentVeilNecropolis: [
   ],

@@ -2,6 +2,7 @@ import { AnimalsSpawnList, EnemySpawnList, ItemSpawnList, NPCSpawnList } from ".
 import { ctx, canvasWidth, canvasHeight } from "../store/canvas";
 import { PushGameObjectArray, OverWrightGameObjectArray, ReadGameObjectArray } from "../store/gameObject";
 import { ItemMetaData } from "../meta/item";
+import { Projetile } from "./projectile";
 import { Node } from "./base/node";
 import { Items } from "./item";
 import { Collision } from "./base/collision";
@@ -15,6 +16,8 @@ import { Weather } from "./weather";
 import { ShowBanner } from "../ui/locationBanner";
 import { UpdateScore } from "../ui/score";
 import { NPC } from "./npc";
+import { AnimationMetaData } from "../meta/animation";
+import { Animation } from "./animation";
 
 export class Game {
   constructor(MetaData) {
@@ -77,7 +80,7 @@ export class Game {
       this.currentNode = this.nodes[name];
       this.generateMap();
       this.generateAdjecentList();
-      player.movementSpeed = 6;
+      player.movementSpeed = 5;
     }, 600)
   }
 
@@ -123,6 +126,14 @@ export class Game {
         if (item.direction)
           PushGameObjectArray(new NPC(NpcMetaData[item.name], item.positionX, item.positionY, index))
       });
+  }
+
+  addProjectile(data) {
+    PushGameObjectArray(new Projetile(data[0], data[1], data[2], data[3], data[4]))
+  }
+
+  addAnimation(data) {
+    PushGameObjectArray(new Animation(AnimationMetaData[data[0]], data[1], data[2], data[3] ? false : true))
   }
 
   updateScore(score) {

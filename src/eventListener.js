@@ -5,7 +5,6 @@ import { Weapon } from './classes/weapon';
 import { WeaponMetaData } from './meta/weapon';
 import { EnemySpawnList } from './adjecentLists';
 
-
 export const EventListener = () => {
   eventEmmiter.on(EventMaping.UP_KEY, (_, onMove) => {
     Hero.moveUp();
@@ -61,5 +60,11 @@ export const EventListener = () => {
   })
   eventEmmiter.on(EventMaping.ENEMY_DEAD, (_, val) => {
     Map.updateAdjacentList(EnemySpawnList, Map.currentNode.name, val);
+  })
+  eventEmmiter.on(EventMaping.ANIMATION, (_, data) => {
+    Map.addAnimation(data);
+  })
+  eventEmmiter.on(EventMaping.PROJECTILE_FIRE, (_, data) => {
+    Map.addProjectile(data)
   })
 }

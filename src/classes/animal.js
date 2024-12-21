@@ -73,7 +73,7 @@ export class Animals extends Living {
         this.idle = true;
         setTimeout(() => {
           this.idle = false;
-        }, Math.random() * 3000 + 1000);
+        }, Math.random() * 4000 + 1000);
       }
     }
   }

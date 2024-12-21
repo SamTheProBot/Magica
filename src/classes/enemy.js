@@ -15,8 +15,13 @@ export class Enemy extends Living {
     this.proximity = MetaData.Range;
     this.attack = MetaData.Attack;
     this.hp = MetaData.Hp;
+    this.maxHp = MetaData.Hp;
     this.image = MetaData.Image;
+    this.showBar = false;
+    this.hideBarTimeout = null;
     this.index = index;
+    this.hpBarProgress = Object.assign(new Image(), { src: `./HUD/LifeBarMiniProgress.png` })
+    this.hpBarUnder = Object.assign(new Image(), { src: `./HUD/LifeBarMiniUnder.png` })
   }
 
   draw(Camera) {
@@ -36,6 +41,33 @@ export class Enemy extends Living {
       this.height * MagnificationFactor
     );
 
+    if (this.showBar) {
+      ctx.drawImage(
+        this.hpBarUnder,
+        0,
+        0,
+        18,
+        18,
+        this.positionX - Camera.X,
+        this.positionY - Camera.Y - 7,
+        this.width * 4,
+        this.height * 3
+      );
+      const hpPercentage = Math.max(this.hp / this.maxHp, 0);
+      const hpBarWidth = (this.width * 4) * hpPercentage;
+      ctx.drawImage(
+        this.hpBarProgress,
+        0,
+        0,
+        18 * hpPercentage,
+        18,
+        this.positionX - Camera.X,
+        this.positionY - Camera.Y - 7,
+        hpBarWidth,
+        this.height * 3
+      );
+    }
+
     if (this.moving && this.gameframe % 5 === 0) {
       if (this.frame < 3) this.frame++;
       else this.frame = 0;
@@ -50,8 +82,15 @@ export class Enemy extends Living {
       this.positionY + this.proximity > playerY &&
       this.positionY - this.proximity < playerY
     ) {
+      this.showBar = true;
       this.moving = true;
       this.idleCounter = 0;
+
+      if (this.hideBarTimeout) {
+        clearTimeout(this.hideBarTimeout);
+        this.hideBarTimeout = null;
+      }
+
       switch (this.getDirection(playerX, playerY)) {
         case Direction.down:
           this.direction = Direction.down;
@@ -71,7 +110,13 @@ export class Enemy extends Living {
           break;
       }
     } else {
-      this.moving = false
+      this.moving = false;
+      if (!this.hideBarTimeout) {
+        this.hideBarTimeout = setTimeout(() => {
+          this.hideBarTimeout = null;
+          this.showBar = false;
+        }, 2500)
+      }
     }
   }
 
